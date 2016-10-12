@@ -8,6 +8,7 @@ dust.config.whitespace = true;
 // This script extracts some identifiers from the available list (data/available-ids)
 
 var generationDir = './tmp';
+var baseUrl = '../../';
 
 program
   .version('0.0.1')
@@ -25,7 +26,7 @@ dust.loadSource(compiled);
 
 
 function renderId(id) {
-  dust.render('card', { id: id }, function(err, out) {
+  dust.render('card', { id: id, baseUrl: baseUrl }, function(err, out) {
     // `out` contains the rendered output.
     var dir = generationDir + '/' + id;
     if (!fs.existsSync(dir)){
