@@ -3,6 +3,7 @@ var program = require('commander');
 var readline = require('readline');
 var fs = require('fs');
 var dust = require('dustjs-linkedin');
+dust.config.whitespace = true;
 
 // This script extracts some identifiers from the available list (data/available-ids)
 
@@ -27,8 +28,10 @@ function renderId(id) {
   dust.render('card', { id: id }, function(err, out) {
     // `out` contains the rendered output.
     var dir = generationDir + '/' + id;
-    fs.mkdirSync(dir);
-    fs.writeFileSync(dir + '/index.html', out);
+    if (!fs.existsSync(dir)){
+      fs.mkdirSync(dir);
+    }
+    fs.writeFileSync(dir + '/index.html', out, {flag: 'w'});
   });
 }
 
