@@ -56,26 +56,9 @@
                     <span class='st_linkedin_vcount' displayText='LinkedIn'></span>
                 </div>
 
-                <p>Berichtje achterlaten? Dat kan!</p>
                 <div class="comments">
+                    <a id="open_comments">Berichtje achterlaten? Dat kan!</a>
                     <div id="disqus_thread"></div>
-                    <script>
-
-                        var disqus_config = function () {
-                            this.page.url = window.location.href;
-                            this.page.identifier = 'card-{id}';
-                        };
-
-                        (function () { // DON'T EDIT BELOW THIS LINE
-                            var d = document, s = d.createElement('script');
-                            s.src = '//project-smile.disqus.com/embed.js';
-                            s.setAttribute('data-timestamp', +new Date());
-                            (d.head || d.body).appendChild(s);
-                        })();
-                    </script>
-                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-                    </noscript>
-
                 </div>
             </div>
         </div>
@@ -115,6 +98,8 @@
 
 </script>
 
+
+<script type="text/javascript" src="assets/script/card.js"></script>
 
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({
