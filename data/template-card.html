@@ -42,14 +42,35 @@
             <div class="card animated slideInRight">
                 <h1>Geef een lach en maak iemand's dag...</h1>
 
-                <img src="tmp/{id}/qr.svg" alt="QR Code" />
+                <img src="tmp/{id}/qr.svg" alt="QR Code"/>
 
                 <p>Geef nu dit kaartje door! </p>
-                <p>Berichtje achterlaten? Dat kan!</p>
                 <div class="bottom">
                     <span class='st_facebook_vcount' displayText='Facebook'></span>
                     <span class='st_twitter_vcount' displayText='Tweet'></span>
                     <span class='st_linkedin_vcount' displayText='LinkedIn'></span>
+                </div>
+
+                <p>Berichtje achterlaten? Dat kan!</p>
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+                    <script>
+
+                        var disqus_config = function () {
+                            this.page.url = window.location.href;
+                            this.page.identifier = 'card-{id}';
+                        };
+
+                        (function () { // DON'T EDIT BELOW THIS LINE
+                            var d = document, s = d.createElement('script');
+                            s.src = '//project-smile.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+                    </noscript>
+
                 </div>
             </div>
         </div>
