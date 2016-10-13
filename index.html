@@ -11,7 +11,8 @@
     <meta property="og:title" content="Project Smile - Brengt de glimlach weer terug op je gezicht"/>
     <meta property="og:image" content="http://projectsmile.nl/img/smile-photo.jpeg"/>
     <meta property="og:site_name" content="Project Smile"/>
-    <meta property="og:description" content="Een glimlach is het mooiste dat je kunt dragen. Wat heeft jou vandaag doen glimlachen?"/>
+    <meta property="og:description"
+          content="Een glimlach is het mooiste dat je kunt dragen. Wat heeft jou vandaag doen glimlachen? Project Smile is een initatief om mensen op een ludieke manier te laten glimlachen."/>
 
     <title>Project Smile - Wat heeft jou vandaag doen glimlachen?</title>
 
@@ -44,13 +45,29 @@
             <div class="col-lg-12">
                 <div class="intro-message">
                     <div class="container">
-                        <h1>Project Smile</h1>
-                        <h3>You are awesome!</h3>
-                        <p>Momenteel 100 kaarten in de omloop. In totaal 200 bezoeken!</p>
+                        <h1>Project Smile - Wat heeft jou vandaag doen glimlachen?</h1>
+                        <p>Project Smile is een initatief om mensen op een ludieke manier te laten glimlachen.
+                        </p>
+                        <h2>Hoe werkt het?</h2>
+                        <p>
+                            Project Smile geeft iedere maand, verspreid over Nederland, een aantal kaartjes weg. Deze kaartjes, ter grootte van een
+                            visitekaart kaart, bevatten een ludieke en/of leuke tekst waar de ontvanger iets mee kan. Soms is het een compliment,
+                            soms een interessante vraag en andere kaartjes bevatten een opdracht.
+                        </p>
+                        <p>De bedoeling is dat deze kaartjes steeds doorgegeven worden. Ontvang je een kaartje? Geef hem dan dezelfde of de
+                            volgende dag nog door aan iemand anders. Hoe meer mensen het kaartje te zien krijgen hoe beter!</p>
+
+                        <p>Op het kaartje staat een link naar een unieke pagina. Wanneer je naar die link gaat zul je je kaartje digitaal zien
+                            zodat je hem ook via Facebook of Twitter kunt delen met je vrienden.</p>
+
+                        <h3>Status</h3>
+                        <p>Momenteel zijn er nog geen kaarten in de omloop. Binnenkort gaan de eerste kaartjes de deur uit!</p>
                         <hr class="intro-divider">
-                        <span class='st_facebook_vcount' displayText='Facebook'></span>
-                        <span class='st_twitter_vcount' displayText='Tweet'></span>
-                        <span class='st_linkedin_vcount' displayText='LinkedIn'></span>
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        <div class="fb-share-button" data-href="http://projectsmile.nl/{id}" data-layout="button_count" data-size="small"
+                             data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank"
+                                                          href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fprojectsmile.nl%2F{id}">Delen</a></div>
+
                     </div>
                 </div>
             </div>
@@ -76,6 +93,17 @@
     </div>
 </footer>
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v2.8&appId=145696559204696";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
 <script>
     (function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
@@ -94,13 +122,6 @@
 
 </script>
 
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">stLight.options({
-    publisher: "87c98ba6-650a-42e3-902a-7c3b313f6136",
-    doNotHash: false,
-    doNotCopy: false,
-    hashAddressBar: false
-});</script>
 </body>
 
 </html>
