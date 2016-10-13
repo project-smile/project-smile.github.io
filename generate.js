@@ -26,6 +26,12 @@ var src = fs.readFileSync('./data/template-card.html', 'utf8');
 var compiled = dust.compile(src, 'card');
 dust.loadSource(compiled);
 
+var oneliners = fs.readFileSync('./data/oneliners', {encoding: 'utf8'}).split('\n');
+function getRandomOneliner() {
+    var max = oneliners.length;
+    return oneliners[Math.round(Math.random() * max)];
+}
+
 
 function renderId(id) {
 
@@ -36,11 +42,16 @@ function renderId(id) {
 
     generateQr(dir, id);
 
-    dust.render('card', {id: id, baseUrl: baseUrl}, function (err, out) {
-        // `out` contains the rendered output.
-        fs.writeFileSync(dir + '/index.html', out, {flag: 'w'});
-    });
-
+    dust.render('card',
+        {
+            id: id,
+            baseUrl: baseUrl,
+            message: getRandomOneliner()
+        },
+        function (err, out) {
+            // `out` contains the rendered output.
+            fs.writeFileSync(dir + '/index.html', out, {flag: 'w'});
+        });
 
 }
 
