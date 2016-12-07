@@ -7,18 +7,19 @@
 	var cards = [
 		{message: 'Ik wens jou alvast hele fijne feestdagen en een geweldig nieuwjaar!', code: 'QOR'},
 		{message: 'Geniet elke dag alsof het je laatste is. Lach wanneer je kan!', code: 'QOR'},
-		{message: 'Je hebt een leuke lach.<br />Die zie ik graag', code: 'QOR'},
-		{message: 'Je ziet er top uit. <br /> Maak er een mooie dag van!', code: 'QOR'},
 		{message: 'A smile everyday,<br/>keeps the darkness away', code: 'QOR'},
-		{message: 'Je bent mooi zoals je bent, <br /> vergeet dat nooit!', code: 'QOR'},
-		{message: 'Je mag trots zijn op wie je bent <br />en wat je hebt bereikt', code: 'QOR'},
-		{message: 'Hoevaak heb jij al gelachen vandaag? Dat kan vast nog wat meer! ', code: 'QOR'},
-		{message: 'Wanneer was jouw laatste goede daad? Zometeen, toch?', code: 'QOR'},
+		{message: 'Hoevaak heb jij al gelachen vandaag?', code: 'QOR'},
+		{message: 'Wanneer was jouw laatste goede daad?', code: 'QOR'},
 		{message: 'Als de trein op tijd rijdt, <br />dan is dat perrongeluk...', code: 'QOR'},
-		{message: 'Wat is hanensoep? <br />Kippensoep met balletjes!', code: 'QOR'},
 		{message: 'Wat maakt iemand zijn dag? <br />Juist, dat is een welgemeende glimlach!', code: 'QOR'},
-		{message: 'Maak eens een praatje met een vreemde. Je zult er geen spijt van hebben!', code: 'QOR'},
-		{message: 'Ik wens jou een fijne dag. <br />Geef het door!', code: 'QOR'}
+		{message: 'Ik wens jou een fijne dag. <br />Geef het door!', code: 'QOR'},
+		{message: 'Je mag trots zijn op wie je bent', code: 'QOR'},
+
+//		{message: 'Je hebt een leuke lach.<br />Die zie ik graag', code: 'QOR'},
+//		{message: 'Je ziet er top uit. <br /> Maak er een mooie dag van!', code: 'QOR'},
+//		{message: 'Je bent mooi zoals je bent, <br /> vergeet dat nooit!', code: 'QOR'},
+//		{message: 'Wat is hanensoep? <br />Kippensoep met balletjes!', code: 'QOR'},
+//		{message: 'Maak eens een praatje met een vreemde. Je zult er geen spijt van hebben!', code: 'QOR'},
 	];
 
 
@@ -162,19 +163,21 @@ height: 61mm;
 .card.front .inner-card .footer {
 	position: absolute;
 	bottom: 4mm;
-	text-align: left;
+	text-align: right;
 	padding-left: 5mm;
 	width: 100%;
-	font-size: 0.65em;
+	line-height: 130%;
+	padding-right: 18mm;
+	font-size: 0.6em;
 	color: white;
-	font-family: "Verdana", sans-serif;
+	font-family: "Helvetica", sans-serif;
 }
 
 .inner-card .QRCode {
-	width: 10mm;
+	width: 12mm;
 	position: absolute;
-	right: 15px;
-	top: 15px;
+	right: 4mm;
+	bottom: 4mm;
 }
 
 .card.back .inner-card .passalong {
@@ -208,7 +211,7 @@ height: 61mm;
    <div class="inner-card">
 	<div class="QRCode">http://projectsmile.nl/QOR</div>
         <div class="message"><p>Ik wil je even zeggen dat je er goed uit ziet vandaag! </p></div>
-	<div class="footer">Scan de QR code of kijk op <i>projectsmile.nl/QOX</i></div>
+	<div class="footer">Wil je weten waar dit kaartje is geweest?<br />Kijk op <i>projectsmile.nl/QOX</i></div>
    </div>
    </div>
 </div>
