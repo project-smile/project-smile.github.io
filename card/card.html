@@ -1,0 +1,233 @@
+<html>
+<head>
+<script src="qrcode.min.js"></script>
+<script>
+
+
+	var cards = [
+		{message: 'Ik wens jou alvast hele fijne feestdagen en een geweldig nieuwjaar!', code: 'QOR'},
+		{message: 'Geniet elke dag alsof het je laatste is. Lach wanneer je kan!', code: 'QOR'},
+		{message: 'Je hebt een leuke lach.<br />Die zie ik graag', code: 'QOR'},
+		{message: 'Je ziet er top uit. <br /> Maak er een mooie dag van!', code: 'QOR'},
+		{message: 'A smile everyday,<br/>keeps the darkness away', code: 'QOR'},
+		{message: 'Je bent mooi zoals je bent, <br /> vergeet dat nooit!', code: 'QOR'},
+		{message: 'Je mag trots zijn op wie je bent <br />en wat je hebt bereikt', code: 'QOR'},
+		{message: 'Hoevaak heb jij al gelachen vandaag? Dat kan vast nog wat meer! ', code: 'QOR'},
+		{message: 'Wanneer was jouw laatste goede daad? Zometeen, toch?', code: 'QOR'},
+		{message: 'Als de trein op tijd rijdt, <br />dan is dat perrongeluk...', code: 'QOR'},
+		{message: 'Wat is hanensoep? <br />Kippensoep met balletjes!', code: 'QOR'},
+		{message: 'Wat maakt iemand zijn dag? <br />Juist, dat is een welgemeende glimlach!', code: 'QOR'},
+		{message: 'Maak eens een praatje met een vreemde. Je zult er geen spijt van hebben!', code: 'QOR'},
+		{message: 'Ik wens jou een fijne dag. <br />Geef het door!', code: 'QOR'}
+	];
+
+
+document.addEventListener('DOMContentLoaded', function() {
+
+
+	var container = document.body;
+	var template = document.getElementById('template');
+	for (var i = 0; i < cards.length; i++) {
+		var cardDetails = cards[i];
+
+		var card = template.cloneNode(true);
+		card.style.display = 'block';
+		card.removeAttribute('id');
+
+		card.querySelector(".QRCode").innerHTML = 'http://projectsmile.nl/' + cardDetails.code + "?qr";
+		card.querySelector(".footer i").innerHTML = 'projectsmile.nl/' + cardDetails.code;
+		card.querySelector(".message p").innerHTML = cardDetails.message;
+
+
+		container.appendChild(card);
+	}
+
+
+
+	var qrCodeElems = document.getElementsByClassName('QRCode');
+	for (var i = 0; i < qrCodeElems.length; i++) {
+		var qrCodeElem = qrCodeElems[i]; 
+		var text = qrCodeElem.innerHTML;
+		qrCodeElem.innerHTML = '';
+		new QRCode(qrCodeElem, { text: text, colorLight: 'transparent' });
+	}
+}); 
+
+</script>
+   <style>
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+@font-face {
+font-family: "Sofia";
+src: url("Sofia-Regular.otf") format("opentype");
+}
+
+      body, html { margin: 0px; padding: 0px; }
+      .card { background-color: white; width: 91mm; height: 61mm; float:left; margin: 0px; padding: 3mm;  }
+      .inner-card { 
+	position: relative;
+	width: 85mm; 
+	height: 55mm; 
+     }
+     .inner-card img { max-height: 100%; max-width: 100%; }
+
+     .card { text-align: center; color: yellow; font-family: "Sofia", sans-serif; }
+
+
+     .card.front .inner-card {
+        background-image: url(front-background.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+     }
+
+	 .card {
+		 page-break-inside:avoid;
+	 }
+
+     .card.back .margin {
+        background-color: #272522;
+	width: 100%;
+	height: 100%;
+	padding: 3mm;
+     }
+     .card.back .border {
+	border: 1mm solid #272522;
+width: 100%;
+height: 100%;
+background-image: url(goldstorm.png);
+background-position: -10;
+background-size: 110%;
+     }
+
+     .card.back .inner-card {
+	position: absolute;
+	left: 7.5mm;
+	top: 7.5mm;
+       width: 76mm; height: 46mm;
+	        background-color: #272522;
+
+
+     }
+     .card.back img.logo {
+        position: absolute;
+	top: 6mm;
+	left: 26mm;
+	height: 27mm;
+     }
+
+.card-container {
+float: left;
+position: relative;
+width: 91mm;
+height: 61mm;
+}
+.card-container .printbox {
+  position: absolute;
+  left: 0;
+  z-index: 1000;
+  top: 0px;
+  background-image: url('printbox.svg');
+  width: 91mm; 
+  height: 61mm;
+}
+
+.card.front .inner-card .message {
+	position: absolute;
+	overflow: hidden;
+	width: 100%;
+	background-color: #272522;
+	top: 20mm;
+	height: 16mm;
+	padding: 1mm;
+	padding-right: 5mm;
+	padding-left: 5mm;
+	color: white;
+}
+
+.card.front .inner-card .message p {
+	display: inline-block;
+	vertical-align: middle;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+}
+
+.card.front .inner-card .footer {
+	position: absolute;
+	bottom: 4mm;
+	text-align: left;
+	padding-left: 5mm;
+	width: 100%;
+	font-size: 0.65em;
+	color: white;
+	font-family: "Verdana", sans-serif;
+}
+
+.inner-card .QRCode {
+	width: 10mm;
+	position: absolute;
+	right: 15px;
+	top: 15px;
+}
+
+.card.back .inner-card .passalong {
+	position: absolute;
+	left: 18mm;
+        top: 33mm;
+	width: 50mm;
+	height: 13mm;
+	font-size: 10pt;
+	text-align: left;
+	vertical-align: top;
+	background-image: url(goldstorm.png);
+        background-size: 100%;
+        background-position: -10;
+        background-repeat: no-repeat;
+	-webkit-background-clip: text;
+ 	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	background-text-fill-color: transparent;
+}
+
+   </style>
+</head>
+<body>
+
+
+<div class="card-container" id="template" style="display: none;">
+<div class="printbox"></div>
+<div class="card front">
+   <div class="margin">
+   <div class="inner-card">
+	<div class="QRCode">http://projectsmile.nl/QOR</div>
+        <div class="message"><p>Ik wil je even zeggen dat je er goed uit ziet vandaag! </p></div>
+	<div class="footer">Scan de QR code of kijk op <i>projectsmile.nl/QOX</i></div>
+   </div>
+   </div>
+</div>
+</div>
+
+
+<div class="card-container">
+<div class="printbox"></div>
+<div class="card back">
+   <div class="margin">
+   <div class="border">
+   <div class="inner-card">
+        <img src="logo.png" class="logo" />
+        <div class="passalong">Geef mij door</div>
+   </div>
+   </div>
+   </div>
+</div>
+</div>
+
+</body>
+</html>
