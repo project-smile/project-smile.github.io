@@ -8,7 +8,7 @@
 		{message: 'Ik wens jou alvast hele fijne feestdagen en een geweldig nieuwjaar!', code: 'QOR'},
 		{message: 'Geniet elke dag alsof het je laatste is. Lach wanneer je kan!', code: 'QOR'},
 		{message: 'A smile everyday,<br/>keeps the darkness away', code: 'QOR'},
-		{message: 'Hoevaak heb jij al gelachen vandaag?', code: 'QOR'},
+		{message: 'Hoe vaak heb jij al gelachen vandaag?', code: 'QOR'},
 		{message: 'Wanneer was jouw laatste goede daad?', code: 'QOR'},
 		{message: 'Als de trein op tijd rijdt, <br />dan is dat perrongeluk...', code: 'QOR'},
 		{message: 'Wat maakt iemand zijn dag? <br />Juist, dat is een welgemeende glimlach!', code: 'QOR'},
@@ -80,7 +80,7 @@ src: url("Sofia-Regular.otf") format("opentype");
      .card { text-align: center; color: yellow; font-family: "Sofia", sans-serif; }
 
 
-     .card.front .inner-card {
+     .card.front {
         background-image: url(front-background.png);
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -90,8 +90,10 @@ src: url("Sofia-Regular.otf") format("opentype");
 		 page-break-inside:avoid;
 	 }
 
+	 .card.back {
+		 background-color: #272522;
+	 }
      .card.back .margin {
-        background-color: #272522;
 	width: 100%;
 	height: 100%;
 	padding: 3mm;
@@ -141,23 +143,21 @@ height: 61mm;
 	position: absolute;
 	overflow: hidden;
 	width: 100%;
-	background-color: #272522;
-	top: 20mm;
+	top: 19mm;
 	height: 16mm;
-	padding: 1mm;
 	padding-right: 5mm;
 	padding-left: 5mm;
 	color: white;
 }
 
 .card.front .inner-card .message p {
-	display: inline-block;
+	display: table-cell;
+	width: 76mm;
+	height: 17mm;
 	vertical-align: middle;
-	width: 100%;
-	height: 100%;
 	text-align: center;
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 }
 
 .card.front .inner-card .footer {
@@ -199,6 +199,14 @@ height: 61mm;
 	background-text-fill-color: transparent;
 }
 
+	   .card-container .blackline {
+		   height: 20mm;
+		   top: 20mm;
+		   width: 100%;
+		   position: absolute;
+		   background-color: #272522;
+	   }
+
    </style>
 </head>
 <body>
@@ -206,11 +214,14 @@ height: 61mm;
 
 <div class="card-container" id="template" style="display: none;">
 <div class="printbox"></div>
+<div class="blackline"></div>
 <div class="card front">
    <div class="margin">
    <div class="inner-card">
 	<div class="QRCode">http://projectsmile.nl/QOR</div>
-        <div class="message"><p>Ik wil je even zeggen dat je er goed uit ziet vandaag! </p></div>
+        <div class="message">
+			<p>Ik wil je even zeggen dat je er goed uit ziet vandaag! </p>
+		</div>
 	<div class="footer">Wil je weten waar dit kaartje is geweest?<br />Kijk op <i>projectsmile.nl/QOX</i></div>
    </div>
    </div>
@@ -225,7 +236,7 @@ height: 61mm;
    <div class="border">
    <div class="inner-card">
         <img src="logo.png" class="logo" />
-        <div class="passalong">Geef mij door</div>
+        <div class="passalong">&nbsp;Geef mij door</div>
    </div>
    </div>
    </div>
