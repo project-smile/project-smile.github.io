@@ -3,54 +3,43 @@
 <script src="qrcode.min.js"></script>
 <script>
 
-
-	var cards = [
-		{message: 'Ik wens jou alvast hele fijne feestdagen en een geweldig nieuwjaar!', codes: ['BGD', '4WK', 'NVS', 'SD5', '2TI', 'UL2', 'HZ7', '3DJ', 'PBL', 'QRI']},
-		{message: 'Geniet elke dag alsof het je laatste is. Lach wanneer je kan!', codes: ['KEH', '0OD', '4BR', '4N9', '35O', 'UJ1', '1WU', 'YMZ', 'XGX', 'MQF']},
-		{message: 'A smile everyday,<br/>keeps the darkness away', codes: ['KEH', '0OD', '4BR', '4N9', '35O', 'UJ1', '1WU', 'YMZ', 'XGX', 'MQF']},
-		{message: 'Hoe vaak heb jij al gelachen vandaag?', codes: ['2RF', 'TYN', 'LXO', 'M8J', 'NII', '5QF', 'F7F', '54O', 'K3A', '317']},
-		{message: 'Wanneer was jouw laatste goede daad?', codes: ['K9M', '7FR', 'U8Q', 'G6Z', 'K1H', 'HDS', 'L21', 'HSO', '6SX', 'GII']},
-		{message: 'Als de trein op tijd rijdt, <br />dan is dat perrongeluk...', codes: ['NGV', 'KTM', 'UNN', 'LCH', 'K46', '8NP', 'HSG', 'RLI', '9AQ', 'HJ9']},
-		{message: 'Wat maakt iemand zijn dag? <br />Juist, dat is een welgemeende glimlach!', codes: ['1RE', 'BQD', '6AS', 'AWE', 'ITS', 'QTF', '1UP', '7WW', '0U5', 'U2U']},
-		{message: 'Ik wens jou een fijne dag. <br />Geef het door!', codes: ['KBH', 'I6V', 'QUP', '8DQ', 'GDA', 'DTR', '6RO', 'EZ4', 'BS1', 'SOY']},
-		{message: 'Je mag trots zijn op wie je bent', codes: ['V39', '1S3', 'Y3C', '1JA', 'J7K', 'YDX', 'XT4', 'U4F', '3RB', 'VSU']},
-		{message: 'TBD', codes: ['TT4', 'VQ9', 'A0I', 'MJ7', 'HIO', 'XRT', '67D', 'B9C', 'NVJ', '1V8']}
-	];
+    var getQueryString = function ( field, url ) {
+        var href = url ? url : window.location.search;
+        var reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
+        var string = reg.exec(href);
+        return string ? decodeURIComponent(string[1]) : null;
+    };
 
 
 document.addEventListener('DOMContentLoaded', function() {
 
+    var message = getQueryString('message');
+    var code = getQueryString('code');
+    createCard(code, message);
 
-	var container = document.body;
-	var template = document.getElementById('template');
-	for (var i = 0; i < cards.length; i++) {
-		var cardDetails = cards[i];
+    function createCard(cardCode, message) {
+        var container = document.body;
+        var template = document.getElementById('template');
+        var card = template.cloneNode(true);
+        card.style.display = 'block';
+        card.removeAttribute('id');
 
-		for (var c = 0; c < cardDetails.codes.length; c++) {
-			var cardCode = cardDetails.codes[c];
-			var card = template.cloneNode(true);
-			card.style.display = 'block';
-			card.removeAttribute('id');
+        card.querySelector(".QRCode").innerHTML = 'http://projectsmile.nl/' + cardCode + "?qr";
+        card.querySelector(".footer i").innerHTML = 'projectsmile.nl/' + cardCode;
+        card.querySelector(".message p").innerHTML = message;
 
-			card.querySelector(".QRCode").innerHTML = 'http://projectsmile.nl/' + cardCode + "?qr";
-			card.querySelector(".footer i").innerHTML = 'projectsmile.nl/' + cardCode;
-			card.querySelector(".message p").innerHTML = cardDetails.message;
-
-
-			container.appendChild(card);
-		}
-	}
-
+        container.appendChild(card);
+    }
 
 
 	var qrCodeElems = document.getElementsByClassName('QRCode');
 	for (var i = 0; i < qrCodeElems.length; i++) {
-		var qrCodeElem = qrCodeElems[i]; 
+		var qrCodeElem = qrCodeElems[i];
 		var text = qrCodeElem.innerHTML;
 		qrCodeElem.innerHTML = '';
 		new QRCode(qrCodeElem, { text: text, colorLight: 'transparent' });
 	}
-}); 
+});
 
 </script>
    <style>
@@ -68,10 +57,10 @@ src: url("Sofia-Regular.otf") format("opentype");
 
       body, html { margin: 0px; padding: 0px; }
       .card { background-color: white; width: 91mm; height: 61mm; float:left; margin: 0px; padding: 3mm;  }
-      .inner-card { 
+      .inner-card {
 	position: relative;
-	width: 85mm; 
-	height: 55mm; 
+	width: 85mm;
+	height: 55mm;
      }
      .inner-card img { max-height: 100%; max-width: 100%; }
 
@@ -133,7 +122,7 @@ height: 61mm;
   z-index: 1000;
   top: 0px;
   background-image: url('printbox.svg');
-  width: 91mm; 
+  width: 91mm;
   height: 61mm;
 }
 
@@ -227,19 +216,19 @@ height: 61mm;
 </div>
 
 
-<div class="card-container">
-<div class="printbox"></div>
-<div class="card back">
-   <div class="margin">
-   <div class="border">
-   <div class="inner-card">
-        <img src="logo.png" class="logo" />
-        <div class="passalong">&nbsp;Geef mij door</div>
-   </div>
-   </div>
-   </div>
-</div>
-</div>
+<!--<div class="card-container">-->
+<!--<div class="printbox"></div>-->
+<!--<div class="card back">-->
+   <!--<div class="margin">-->
+   <!--<div class="border">-->
+   <!--<div class="inner-card">-->
+        <!--<img src="logo.png" class="logo" />-->
+        <!--<div class="passalong">&nbsp;Geef mij door</div>-->
+   <!--</div>-->
+   <!--</div>-->
+   <!--</div>-->
+<!--</div>-->
+<!--</div>-->
 
 </body>
 </html>
