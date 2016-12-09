@@ -15,11 +15,12 @@ var baseUrl = '../../';
 program
     .version('0.0.1')
     .usage('[options] ')
+    .option('-i, --id [card-id]', 'Generate this cardId', null)
     .option('-c, --cards [amount]', 'Set the amount of cards you want to generate [100]', '100')
     .parse(process.argv);
 
 var amount = program.cards;
-console.log('Going to generate ' + amount + ' cards...');
+var cardId = program.id;
 
 // load dust template
 var src = fs.readFileSync('./data/template-card.html', 'utf8');
@@ -34,6 +35,8 @@ function getRandomOneliner() {
 
 
 function renderId(id) {
+
+    appendGeneratedId(id);
 
     var dir = generationDir + '/' + id;
     if (!fs.existsSync(dir)) {
@@ -72,23 +75,41 @@ function generateQr(dir, id) {
     });
 }
 
-// read file
-var rl = readline.createInterface({
-    input: fs.createReadStream('./data/available-ids')
-});
-
 var writeStream = fs.createWriteStream('./data/generated-ids', {flags: 'a'});
-var lineCount = 0;
-rl.on('line', function (input) {
-    lineCount++;
-    if (lineCount > amount) {
-        writeStream.write(input);
+function appendGeneratedId(id) {
+    if (!fs.existsSync(generationDir + '/' + id + '/index.html')) {
         writeStream.write("\n");
-    } else {
-        renderId(input);
+        writeStream.write(id);
     }
-});
+}
 
-rl.on('close', function () {
-    writeStream.close();
-});
+if (cardId) {
+    console.log('Going to generate card with ID ' + cardId);
+    renderId(cardId);
+} else {
+
+    console.log('Going to generate ' + amount + ' cards...');
+// read file
+    var rl = readline.createInterface({
+        input: fs.createReadStream('./data/available-ids')
+    });
+
+    var newAvailableFileStream = fs.createWriteStream('./data/available-ids.new', 'utf8');
+
+    var lineCount = 0;
+    rl.on('line', function (input) {
+        lineCount++;
+        if (lineCount > amount) {
+            if (lineCount - amount > 1) {
+                newAvailableFileStream.write('\n');
+            }
+            newAvailableFileStream.write(input);
+        } else {
+            renderId(input);
+        }
+    });
+
+    rl.on('close', function () {
+        writeStream.close();
+    });
+}
