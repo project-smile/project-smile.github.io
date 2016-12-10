@@ -2,36 +2,36 @@
     xmlns="http://www.w3.org/2000/svg">
 
   <!-- top left -->
-  <line x1="50" y1="0" x2="50" y2="50" stroke-width="3" stroke="white"/>
-  <line x1="50" y1="0" x2="50" y2="50" stroke-width="1" stroke="black"/>
+  <line x1="50" y1="0" x2="50" y2="40" stroke-width="3" stroke="white"/>
+  <line x1="50" y1="0" x2="50" y2="40" stroke-width="1" stroke="black"/>
 
  <!-- left top -->
-  <line x1="0" y1="50" x2="50" y2="50" stroke-width="3" stroke="white"/>
-  <line x1="0" y1="50" x2="50" y2="50" stroke-width="1" stroke="black"/>
+  <line x1="0" y1="50" x2="40" y2="50" stroke-width="3" stroke="white"/>
+  <line x1="0" y1="50" x2="40" y2="50" stroke-width="1" stroke="black"/>
 
   <!-- top right -->
-  <line x1="860" y1="0" x2="860" y2="50" stroke-width="3" stroke="white"/>
-  <line x1="860" y1="0" x2="860" y2="50" stroke-width="1" stroke="black"/>
+  <line x1="860" y1="0" x2="860" y2="40" stroke-width="3" stroke="white"/>
+  <line x1="860" y1="0" x2="860" y2="40" stroke-width="1" stroke="black"/>
 
   <!-- right top -->
-  <line x1="860" y1="50" x2="910" y2="50" stroke-width="3" stroke="white"/>
-  <line x1="860" y1="50" x2="910" y2="50" stroke-width="1" stroke="black"/>
+  <line x1="870" y1="50" x2="910" y2="50" stroke-width="3" stroke="white"/>
+  <line x1="870" y1="50" x2="910" y2="50" stroke-width="1" stroke="black"/>
 
   <!-- bottom left -->
-  <line x1="50" y1="610" x2="50" y2="560" stroke-width="3" stroke="white"/>
-  <line x1="50" y1="610" x2="50" y2="560" stroke-width="1" stroke="black"/>
+  <line x1="50" y1="610" x2="50" y2="570" stroke-width="3" stroke="white"/>
+  <line x1="50" y1="610" x2="50" y2="570" stroke-width="1" stroke="black"/>
 
   <!-- left bottom -->
-  <line x1="0" y1="560" x2="50" y2="560" stroke-width="3" stroke="white"/>
-  <line x1="0" y1="560" x2="50" y2="560" stroke-width="1" stroke="black"/>
+  <line x1="0" y1="560" x2="40" y2="560" stroke-width="3" stroke="white"/>
+  <line x1="0" y1="560" x2="40" y2="560" stroke-width="1" stroke="black"/>
 
 
   <!-- bottom right -->
-  <line x1="860" y1="610" x2="860" y2="560" stroke-width="3" stroke="white"/>
-  <line x1="860" y1="610" x2="860" y2="560" stroke-width="1" stroke="black"/>
+  <line x1="860" y1="610" x2="860" y2="570" stroke-width="3" stroke="white"/>
+  <line x1="860" y1="610" x2="860" y2="570" stroke-width="1" stroke="black"/>
 
   <!-- right bottom -->
-  <line x1="860" y1="560" x2="910" y2="560" stroke-width="3" stroke="white"/>
-  <line x1="860" y1="560" x2="910" y2="560" stroke-width="1" stroke="black"/>
+  <line x1="870" y1="560" x2="910" y2="560" stroke-width="3" stroke="white"/>
+  <line x1="870" y1="560" x2="910" y2="560" stroke-width="1" stroke="black"/>
 
 </svg>
