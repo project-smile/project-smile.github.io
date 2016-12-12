@@ -1,0 +1,268 @@
+# Example YAML to get you started quickly.
+# Be aware that YAML has indentation based scoping.
+# Code completion support is available so start typing for available options.
+swagger: '2.0'
+
+# This is your document metadata
+info:
+  version: "0.0.1"
+  title: Project Smile API
+  description: Project Smile
+  
+
+host: api.projectsmile.nl
+basePath: /v1
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+
+# Describe your paths here
+paths:
+  # This is a path endpoint. Change it.
+  /cards:
+    # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets `Cards` objects.
+        Optional query param of **limit** determines
+        size of returned array. Defaults to 10
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: limit
+          in: query
+          description: Size of array
+          required: false
+          type: number
+          default: 100
+          format: double
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+            title: ArrayOfCards
+            type: array
+            items:
+              $ref: '#/definitions/Card'
+  
+    post:
+      description: |
+        Create a new `Card` object.
+      parameters:
+        -
+          name: card
+          in: body
+          description: The details about this new card
+          required: true
+          schema:
+            $ref: '#/definitions/NewCard'
+      responses:
+        # Response code
+        201:
+          description: Created  
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Card'    
+  /cards/{cardId}:
+     # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets `Cards` objects.
+        Optional query param of **limit** determines
+        size of returned array. Defaults to 10
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: cardId
+          in: path
+          description: The card to load
+          required: true
+          type: string
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+            $ref: '#/definitions/Card'
+
+  /cards/{cardId}/tracking:
+     # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Get tracking info about `Card` object.
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: cardId
+          in: path
+          description: The card to load
+          required: true
+          type: string
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AggregatedCardTrackingInfo'
+
+            
+  /cards/{cardId}/gotcha:
+    get: 
+      description: get all gotcha's for this `card`
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: cardId
+          in: path
+          description: The card the user found
+          required: true
+          type: string
+      responses:
+        200:
+          description: All gotcha's
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+            title: ArrayOfCards
+            type: array
+            items:
+              $ref: '#/definitions/Gotcha'          
+    post:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Notes that someone has received the `Card`.
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: cardId
+          in: path
+          description: The card the user found
+          required: true
+          type: string
+        -
+          name: gotcha
+          in: body
+          description: The details about a card that has been found
+          required: true
+          schema:
+            $ref: '#/definitions/Gotcha'          
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        201:
+          description: Created
+          schema:
+            type: string
+            description: Unique identifier for this gotcha
+          
+  /card-template:
+    post:
+      description: Create a new template-card
+      parameters:
+        -
+          name: template
+          in: body
+          description: The template details
+          required: true
+          schema:
+            $ref: '#/definitions/CardTemplate'  
+      responses:
+        # Response code
+        201:
+          description: Created
+          schema:
+            type: string
+            description: Unique identifier for this card template
+                
+definitions:
+  NewCard:
+    type: object
+    properties:
+      template:
+        type: string
+      amount:
+        description: The amount of new cards to generate
+        type: integer
+  Card:
+    type: object
+    properties:
+      message:
+        type: string
+      code:
+        type: string  
+      gotchas:
+        type: integer
+      views:
+        type: integer
+        
+  AggregatedCardTrackingInfo:
+    type: object
+    properties:
+      views:
+        type: array
+        items: 
+          $ref: '#/definitions/LocationAggregate'          
+
+  LocationAggregate:
+    type: object
+    properties:
+      location:
+        description: The aggregate location
+        type: string
+      count:
+        description: The amount of matches in the aggregate
+        type: integer
+        
+  CardTemplate:
+    type: object
+    properties:
+      message:
+        description: The message that is going to be put on the card
+        type: string
+      layout:
+        description: The layout (HTML) to be used for cards generated based on this template
+        type: string        
+            
+  Gotcha: 
+    type: object
+    properties:
+      id:
+        description: The unique identifier for this gotcha. Note that this property can never be set; only retrieved
+        type: string
+      location:
+        description: Description of the location where the card was located
+        type: string
+      when:
+        description: When the card was found (the gotcha moment)
+        type: string
+        format: date-time
+      selfie:
+        description: The base64 encoded image of someone with the card
+        type: string
+        format: byte
+      comment:
+        description: The comment given by the user about finding the gotcha
+        type: string
+      approve_photo_placement:
+        description: Whether or not the user approves of placing this picture on the website
+        type: boolean
