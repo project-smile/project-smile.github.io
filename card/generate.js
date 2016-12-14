@@ -6,7 +6,7 @@ var cards = [
 	{message: 'Ik wens jou alvast hele fijne feestdagen en een geweldig nieuwjaar!', codes: [
         'BGD', '4WK', 'NVS', 'SD5', '2TI', 'UL2', 'HZ7', '3DJ', 'PBL', 'QRI', 'TT4', 'VQ9', 'A0I', 'MJ7', 'HIO', 'XRT', '67D', 'B9C', 'NVJ', '1V8']},
 	{message: 'Geniet elke dag alsof het je laatste is. Lach wanneer je kan!', codes: ['KEH', '0OD', '4BR', '4N9', '35O', 'UJ1', '1WU', 'YMZ', 'XGX', 'MQF']},
-	{message: 'A smile everyday,<br/>keeps the darkness away', codes: ['KEH', '0OD', '4BR', '4N9', '35O', 'UJ1', '1WU', 'YMZ', 'XGX', 'MQF']},
+	{message: 'A smile everyday,<br/>keeps the darkness away', codes: ['DK1', 'L3C', 'OF8', 'RXL', 'BG5', '3GN', 'IP3', 'MVY', '92T', 'A1D']},
 	{message: 'Hoe vaak heb jij al gelachen vandaag?', codes: ['2RF', 'TYN', 'LXO', 'M8J', 'NII', '5QF', 'F7F', '54O', 'K3A', '317']},
 	{message: 'Wanneer was jouw laatste goede daad?', codes: ['K9M', '7FR', 'U8Q', 'G6Z', 'K1H', 'HDS', 'L21', 'HSO', '6SX', 'GII']},
 	{message: 'Als de trein op tijd rijdt, <br />dan is dat perrongeluk...', codes: ['NGV', 'KTM', 'UNN', 'LCH', 'K46', '8NP', 'HSG', 'RLI', '9AQ', 'HJ9']},
