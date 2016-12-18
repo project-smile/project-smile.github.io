@@ -1,9 +1,3 @@
-/*
- * Start Bootstrap - Landing Page (http://startbootstrap.com/)
- * Copyright 2013-2016 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
- */
-
 body,
 html {
     width: 100%;
@@ -16,9 +10,38 @@ html {
 }
 
 body {
-  background: url(../img/intro-bg.jpg) no-repeat center center;
-  background-size: cover;
+  /*background: url(../img/intro-bg.jpg) no-repeat center center;*/
+  /*background-size: cover;
+  */
+    background-color: #272522;
+    color: white;
 }
+
+.intro-header > .container {
+    min-height: 100px;
+}
+
+
+.card {
+    background-image: url('../../card/front-background.png');
+    background-size: 100%;
+    /*min-width: 420px;*/
+    max-width: 600px;
+    min-height: 275px;
+}
+
+
+
+.intro-header {
+    height: 600px;
+    background-color: #272522;
+    color: white;
+}
+
+/*#map {*/
+    /*height: 200px;*/
+    /*min-width: 420px;*/
+/*}*/
 
 body,
 h1,
@@ -31,163 +54,133 @@ h6 {
     font-weight: 700;
 }
 
-.container.card {
-    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-    min-height: 100vh; /* These two lines are counted as one :-)       */
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-}
-
-.container.card .card {
-    border-radius: 5px;
-    padding: 15px;
-    display: inline-block;
-    min-width: 300px;
-    margin: auto;
-    max-width: 600px;
-    background-color: white;
-    animation-duration: 2s;
-
-}
-
-.intro-message {
-    position: relative;
-    padding-top: 20%;
-    padding-bottom: 10%;
-}
-
-.intro-message > .container {
-  background-color: rgba(255, 255, 255, 0.7);
-  height: 100%;
-}
-
-.intro-message > .card {
-    width: 400px;
-    background-color: rgba(255, 255, 255, 0.9);
-}
-
-.intro-message > h1 {
-    margin: 0;
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
-    font-size: 5em;
-}
-
-.intro-divider {
-    width: 400px;
-    border-top: 1px solid #f8f8f8;
-    border-bottom: 1px solid rgba(0,0,0,0.2);
-}
-
-.intro-message > h3 {
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
-}
-
-@media(max-width:767px) {
-    .intro-message {
-        padding-bottom: 15%;
-    }
-
-    .intro-message > h1 {
-        font-size: 3em;
-    }
-
-    ul.intro-social-buttons > li {
-        display: block;
-        margin-bottom: 20px;
-        padding: 0;
-    }
-
-    ul.intro-social-buttons > li:last-child {
-        margin-bottom: 0;
-    }
-
-    .intro-divider {
-        width: 100%;
-    }
-}
-
-.network-name {
-    text-transform: uppercase;
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 2px;
-}
-
-.content-section-a {
-    padding: 50px 0;
-    background-color: #f8f8f8;
-}
-
-.content-section-b {
-    padding: 50px 0;
-    border-top: 1px solid #e7e7e7;
-    border-bottom: 1px solid #e7e7e7;
-}
-
-.section-heading {
-    margin-bottom: 30px;
-}
-
-.section-heading-spacer {
-    float: left;
-    width: 200px;
-    border-top: 3px solid #e7e7e7;
-}
-
-.banner {
-    padding: 100px 0;
-    color: #f8f8f8;
-    background: url(../img/banner-bg.jpg) no-repeat center center;
-    background-size: cover;
-}
-
-.banner h2 {
-    margin: 0;
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
-    font-size: 3em;
-}
-
-.banner ul {
-    margin-bottom: 0;
-}
-
-.banner-social-buttons {
-    float: right;
-    margin-top: 0;
-}
-
-@media(max-width:1199px) {
-    ul.banner-social-buttons {
-        float: left;
-        margin-top: 15px;
-    }
-}
-
-@media(max-width:767px) {
-    .banner h2 {
-        margin: 0;
-        text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
-        font-size: 3em;
-    }
-
-    ul.banner-social-buttons > li {
-        display: block;
-        margin-bottom: 20px;
-        padding: 0;
-    }
-
-    ul.banner-social-buttons > li:last-child {
-        margin-bottom: 0;
-    }
-}
-
-footer {
-    padding: 50px 0;
-}
 
 p.copyright {
     margin: 15px 0 0;
+}
+
+
+body.full {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-image: url(http://maps.googleapis.com/maps/api/staticmap?center=Nederland&zoom=7&scale=2&size=600x300&maptype=roadmap&key=AIzaSyAYRARsCScDvrIyzZuKunjCT-wHV2l_p2M&format=png&maptype=roadmap&style=element:geometry%7Ccolor:0x242f3e&style=element:labels.text.fill%7Ccolor:0x746855&style=element:labels.text.stroke%7Ccolor:0x242f3e&style=feature:administrative.land_parcel%7Cvisibility:off&style=feature:administrative.locality%7Celement:labels.text.fill%7Ccolor:0xd59563&style=feature:administrative.neighborhood%7Cvisibility:off&style=feature:poi%7Celement:labels.text%7Cvisibility:off&style=feature:poi%7Celement:labels.text.fill%7Ccolor:0xd59563&style=feature:poi.business%7Cvisibility:off&style=feature:poi.park%7Celement:geometry%7Ccolor:0x263c3f&style=feature:poi.park%7Celement:labels.text%7Cvisibility:off&style=feature:poi.park%7Celement:labels.text.fill%7Ccolor:0x6b9a76&style=feature:road%7Celement:geometry%7Ccolor:0x38414e&style=feature:road%7Celement:geometry.stroke%7Ccolor:0x212a37&style=feature:road%7Celement:labels%7Cvisibility:off&style=feature:road%7Celement:labels.text.fill%7Ccolor:0x9ca5b3&style=feature:road.arterial%7Cvisibility:off&style=feature:road.highway%7Celement:geometry%7Ccolor:0x746855&style=feature:road.highway%7Celement:geometry.stroke%7Ccolor:0x1f2835&style=feature:road.highway%7Celement:labels%7Cvisibility:off&style=feature:road.highway%7Celement:labels.text.fill%7Ccolor:0xf3d19c&style=feature:road.local%7Cvisibility:off&style=feature:transit%7Celement:geometry%7Ccolor:0x2f3948&style=feature:transit.station%7Celement:labels.text.fill%7Ccolor:0xd59563&style=feature:water%7Celement:geometry%7Ccolor:0x17263c&style=feature:water%7Celement:labels.text%7Cvisibility:off&style=feature:water%7Celement:labels.text.fill%7Ccolor:0x515c6d&style=feature:water%7Celement:labels.text.stroke%7Ccolor:0x17263c&size=480x360);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+body.full #map {
+    width: 100%;
+    height: 100%;
+
+}
+
+
+body.full img.logo {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    width: 60px;
+}
+
+body.full footer {
+    position: absolute;
+    bottom: 0px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 2px solid white;
+    border-top-right-radius: 2em;
+    border-top-left-radius: 2em;
+    height: 40px;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+}
+
+body.full footer > {
+    display: inline-block;
+}
+
+img.card-example {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 50px;
+    border: 1px solid #0e1626;
+    border-radius: 1px;
+}
+
+.elementToFadeInAndOut {
+    opacity: 1;
+    animation: fade 3s infinite;
+}
+
+
+@keyframes fade {
+    0%,100% { opacity: 0.6 }
+    50% { opacity: 1 }
+}
+
+body.full div.overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 10px;
+    padding-bottom: 50px;
+    padding-right: 5px;
+    padding-left: 5px;
+    z-index: 100;
+}
+
+body.full div.overlay > div.content {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.8);
+    /*display: none;*/
+    border: 10px;
+    border-radius: 10px;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+}
+
+body.full div.overlay > div.content .closeMe {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+div.overlay.fade.in {
+    -webkit-animation-name: fadeIn;
+    -webkit-animation-delay: 1s;
+    -webkit-animation-duration: 2s;
+    display: block;
+}
+
+div.overlay.fade.out {
+    -webkit-animation-name: fadeOut;
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(startYposition);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(endYposition);
+    }
+}
+
+@-webkit-keyframes fadeOut {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(startYposition);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(endYposition);
+    }
 }
