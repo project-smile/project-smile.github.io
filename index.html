@@ -4,7 +4,7 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta name="description" content="Een glimlach is het mooiste dat je kunt dragen. Wat heeft jou vandaag doen glimlachen?">
     <meta name="author" content="Sander de Groot">
 
@@ -376,7 +376,9 @@
 
 <img src="card/logo.png" alt="Project Smile Logo" class="logo"/>
 
-<img src="assets/img/card-example.png" class="card-example elementToFadeInAndOut">
+<a onclick="document.getElementById('cardOverlay').classList.add('visible')" class="card-link">
+    <img src="assets/img/card-example.png" class="card-example elementToFadeInAndOut" alt="Jouw kaartje">
+</a>
 
 <div class="share overlay" id="shareOverlay">
     <div class="content">
@@ -424,6 +426,16 @@
     </div>
 </div>
 
+<div class="overlay" id="cardOverlay">
+    <div class="content">
+        <p>Hier staat jouw kaartje</p>
+
+        <button type="button" class="btn btn-primary btn-sm closeMe" onclick="document.getElementById('cardOverlay').classList.remove('visible')">
+            Sluiten
+        </button>
+
+    </div>
+</div>
 
 <footer>
     <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('shareOverlay').classList.add('visible')">Dit vind ik
