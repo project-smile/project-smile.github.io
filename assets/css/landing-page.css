@@ -15,14 +15,6 @@ body {
     color: #0e1626;
 }
 
-.card {
-    background-image: url('../../card/front-background.png');
-    background-size: 100%;
-    /*min-width: 420px;*/
-    max-width: 600px;
-    min-height: 275px;
-}
-
 body,
 h1,
 h2,
@@ -158,6 +150,30 @@ body.full #cardOverlay.visible {
     -webkit-animation-name: slideInTopRight;
     top: 0;
     left: 0;
+}
+
+body.full #cardOverlay div.card {
+    max-width: 100%;
+    position: relative;
+    display: inline-block;
+}
+
+body.full #cardOverlay div.card img.background {
+    width: inherit;
+}
+
+body.full #cardOverlay div.card p.message {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    text-align: center;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    padding-top: 30%;
+    vertical-align: middle;
+    color: white;
 }
 
 @keyframes slideInTopRight {

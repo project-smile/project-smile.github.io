@@ -8,6 +8,10 @@
     <meta name="description" content="Een glimlach is het mooiste dat je kunt dragen. Wat heeft jou vandaag doen glimlachen?">
     <meta name="author" content="Sander de Groot">
 
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+
     <meta property="og:title" content="Project Smile - Brengt de glimlach weer terug op je gezicht"/>
     <meta property="og:image" content="http://projectsmile.nl/img/smile-photo.jpeg"/>
     <meta property="og:site_name" content="Project Smile"/>
@@ -35,14 +39,14 @@
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var sentiments = document.querySelectorAll('ul.sentiment');
-            sentiments.forEach(function(sentiment) {
+            sentiments.forEach(function (sentiment) {
                 var liItems = sentiment.querySelectorAll('li');
-                liItems.forEach(function(liItem) {
-                    liItem.addEventListener('click', function() {
+                liItems.forEach(function (liItem) {
+                    liItem.addEventListener('click', function () {
                         liItem.querySelector('input').checked = true;
-                        liItems.forEach(function(liItem) {
+                        liItems.forEach(function (liItem) {
                             liItem.classList.remove('selected');
                         });
                         liItem.classList.add('selected');
@@ -52,18 +56,18 @@
         });
 
 
-//        try {
-//            console.log('getting position');
-//            var result = navigator.geolocation.getCurrentPosition(function (position) {
-//                console.log('got data!');
-//            }, function handleErr(err) {
-//                console.log('got err: ');
-//                console.log(err);
-//            });
-//            console.log('result = ' + result);
-//        } catch (e ) {
-//            console.log('error: ' + e);
-//        }
+        //        try {
+        //            console.log('getting position');
+        //            var result = navigator.geolocation.getCurrentPosition(function (position) {
+        //                console.log('got data!');
+        //            }, function handleErr(err) {
+        //                console.log('got err: ');
+        //                console.log(err);
+        //            });
+        //            console.log('result = ' + result);
+        //        } catch (e ) {
+        //            console.log('error: ' + e);
+        //        }
 
         function initMap() {
             var input = document.getElementById('placesSearchBox');
@@ -467,7 +471,7 @@
             <ul class="sentiment">
                 <li><input type="radio" value="&#128525;" name="sentiment"/>&#128525;</li><!-- smiling with heart eyes -->
                 <li><input type="radio" value="&#128516;" name="sentiment"/>&#128516;</li><!-- happy smile -->
-                <li class="selected"><input type="radio" value="&#128077;" name="sentiment" checked />&#128077;</li><!-- thumbs up -->
+                <li class="selected"><input type="radio" value="&#128077;" name="sentiment" checked/>&#128077;</li><!-- thumbs up -->
                 <li><input type="radio" value="&#128078;" name="sentiment"/>&#128078;</li><!-- thumbs down -->
                 <li><input type="radio" value="&#128544;" name="sentiment"/>&#128544;</li><!-- angry -->
             </ul>
@@ -479,10 +483,11 @@
             </ul>
 
 
-            <input type="submit" value="Verstuur" class="btn btn-primary btn-sm" />
+            <input type="submit" value="Verstuur" class="btn btn-primary btn-sm"/>
         </form>
 
-        <button type="button" class="btn btn-primary btn-sm closeMe" onclick="document.getElementById('ikhebereenOverlay').classList.remove('visible')">
+        <button type="button" class="btn btn-primary btn-sm closeMe"
+                onclick="document.getElementById('ikhebereenOverlay').classList.remove('visible')">
             Annuleren
         </button>
 
@@ -493,6 +498,11 @@
     <div class="content">
         <p>Hier staat jouw kaartje</p>
 
+        <div class="card">
+            <img src="/assets/img/card-background.png" class="background" alt="card background"/>
+            <p class="message">Geniet elke dag alsof het je laatste is. Lach wanneer je kan!</p>
+        </div>
+
         <button type="button" class="btn btn-primary btn-sm closeMe" onclick="document.getElementById('cardOverlay').classList.remove('visible')">
             Sluiten
         </button>
@@ -502,11 +512,14 @@
 
 <footer>
     <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('shareOverlay').classList.add('visible')">Dit vind ik
-        leuk</button>
+        leuk
+    </button>
     <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('ikhebereenOverlay').classList.add('visible')">
-        Ik heb hem!</button>
+        Ik heb hem!
+    </button>
     <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('watisditOverlay').classList.add('visible')">
-        Wat is dit?</button>
+        Wat is dit?
+    </button>
 </footer>
 
 </body>
