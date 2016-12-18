@@ -11,17 +11,9 @@ html {
 }
 
 body {
-  /*background: url(../img/intro-bg.jpg) no-repeat center center;*/
-  /*background-size: cover;
-  */
     background-color: #272522;
-    color: white;
+    color: #0e1626;
 }
-
-.intro-header > .container {
-    min-height: 100px;
-}
-
 
 .card {
     background-image: url('../../card/front-background.png');
@@ -30,19 +22,6 @@ body {
     max-width: 600px;
     min-height: 275px;
 }
-
-
-
-.intro-header {
-    height: 600px;
-    background-color: #272522;
-    color: white;
-}
-
-/*#map {*/
-    /*height: 200px;*/
-    /*min-width: 420px;*/
-/*}*/
 
 body,
 h1,
@@ -55,6 +34,9 @@ h6 {
     font-weight: 700;
 }
 
+h1 {
+    font-size: 2em;
+}
 
 
 p.copyright {
@@ -153,7 +135,6 @@ body.full div.overlay > div.content {
     height: 100%;
     width: 100%;
     padding: 10px;
-    color: #0e1626;
 }
 
 body.full div.overlay > div.content .closeMe {
@@ -186,6 +167,28 @@ body.full #cardOverlay.visible {
 
 div.overlay.fade.out {
     -webkit-animation-name: fadeOut;
+}
+
+#ikhebereenOverlay ul.sentiment {
+    margin: 0;
+    padding: 0;
+}
+
+#ikhebereenOverlay ul.sentiment li {
+    display: inline-block;
+    list-style-type: none;
+    cursor: pointer;
+    font-size: 2em;
+    padding: 3px;
+    opacity: 0.5;
+}
+
+#ikhebereenOverlay ul.sentiment li.selected {
+    opacity: 1;
+}
+
+#ikhebereenOverlay ul.sentiment li input {
+    display: none;
 }
 
 @-webkit-keyframes fadeIn {
