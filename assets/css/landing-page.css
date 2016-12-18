@@ -133,6 +133,7 @@ body.full div.overlay {
     padding-right: 5px;
     padding-left: 5px;
     z-index: 100;
+    margin-top: 100%;
 }
 
 body.full div.overlay > div.content {
@@ -152,11 +153,11 @@ body.full div.overlay > div.content .closeMe {
     right: 5px;
 }
 
-div.overlay.fade.in {
-    -webkit-animation-name: fadeIn;
-    -webkit-animation-delay: 1s;
-    -webkit-animation-duration: 2s;
-    display: block;
+body.full  div.overlay.visible {
+    /*-webkit-animation-name: fadeIn;*/
+    /*-webkit-animation-delay: 1s;*/
+    /*-webkit-animation-duration: 2s;*/
+    margin-top: 0;
 }
 
 div.overlay.fade.out {
