@@ -51,6 +51,7 @@
             });
         });
 
+
 //        try {
 //            console.log('getting position');
 //            var result = navigator.geolocation.getCurrentPosition(function (position) {
@@ -65,6 +66,9 @@
 //        }
 
         function initMap() {
+            var input = document.getElementById('placesSearchBox');
+            var searchBox = new google.maps.places.SearchBox(input);
+
             var mapOptions = {
                 zoom: 7,
                 center: new google.maps.LatLng(51.9814708, 5.1163364),
@@ -385,7 +389,7 @@
         }
     </script>
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjL6cvWIfMIFOkvpJtEKjsZFRe6oCXwN4&callback=initMap"></script>
+            src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDjL6cvWIfMIFOkvpJtEKjsZFRe6oCXwN4&callback=initMap"></script>
 </head>
 
 <body class="full">
@@ -451,7 +455,10 @@
 
         <form method="post" enctype="multipart/form-data">
 
-            <input type="text" placeholder="Je voornaam" />
+            <input type="text" placeholder="Je voornaam" name="firstname"/>
+
+            <p>Waar heb je dit kaartje gekregen?</p>
+            <input type="text" name="location" id="placesSearchBox" placeholder="Type de naam van de plek"/>
 
             <p>Maak een selfie met het kaartje</p>
             <input type="file" accept="image/*;capture=camera">
