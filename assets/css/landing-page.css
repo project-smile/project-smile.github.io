@@ -179,10 +179,6 @@ body.full #cardOverlay div.card p.message {
     text-align: center;
     top: 0;
     left: 0;
-    display: inline-block;
-    padding-top: 30%;
-    vertical-align: middle;
-    color: white;
 }
 
 @keyframes slideInTopRight {
