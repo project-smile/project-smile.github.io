@@ -9,8 +9,8 @@ info:
   title: Project Smile API
   description: Project Smile
   
-
 host: api.projectsmile.nl
+
 basePath: /v1
 schemes:
   - http
@@ -54,6 +54,10 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Card'
+        400:
+          $ref: '#/responses/InvalidRequest'   
+        default:
+          $ref: '#/responses/ServerError'                  
   
     post:
       description: |
@@ -67,13 +71,16 @@ paths:
           schema:
             $ref: '#/definitions/NewCard'
       responses:
-        # Response code
         201:
           description: Created  
           schema:
             type: array
             items:
               $ref: '#/definitions/Card'    
+        400:
+          $ref: '#/responses/InvalidRequest'   
+        default:
+          $ref: '#/responses/ServerError'             
   /cards/{cardId}:
      # This is a HTTP operation
     get:
@@ -100,6 +107,10 @@ paths:
           # Use JSON Schema format
           schema:
             $ref: '#/definitions/Card'
+        400:
+          $ref: '#/responses/InvalidRequest'   
+        default:
+          $ref: '#/responses/ServerError'    
 
   /cards/{cardId}/tracking:
      # This is a HTTP operation
@@ -123,6 +134,10 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/AggregatedCardTrackingInfo'
+        400:
+          $ref: '#/responses/InvalidRequest'   
+        default:
+          $ref: '#/responses/ServerError'                
 
             
   /cards/{cardId}/gotcha:
@@ -146,6 +161,10 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Gotcha'          
+        400:
+          $ref: '#/responses/InvalidRequest'   
+        default:
+          $ref: '#/responses/ServerError'     
     post:
       # Describe this verb here. Note: you can use markdown
       description: |
@@ -174,8 +193,29 @@ paths:
           schema:
             type: string
             description: Unique identifier for this gotcha
+        400:
+          $ref: '#/responses/InvalidRequest'   
+        default:
+          $ref: '#/responses/ServerError'   
           
   /card-template:
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets all `CardTemplate` objects.
+      responses:
+        200:
+          description: Successful response
+          schema:
+            title: ArrayOfCardTemplates
+            type: array
+            items:
+              $ref: '#/definitions/CardTemplate'
+        400:
+          $ref: '#/responses/InvalidRequest'   
+        default:
+          $ref: '#/responses/ServerError'   
+          
     post:
       description: Create a new template-card
       parameters:
@@ -193,8 +233,46 @@ paths:
           schema:
             type: string
             description: Unique identifier for this card template
+        400:
+          $ref: '#/responses/InvalidRequest'   
+        default:
+          $ref: '#/responses/ServerError'     
+              
+responses:
+  InvalidRequest:
+    description: Invalid request
+    schema:
+      $ref: '#/definitions/Error'   
+      
+  ServerError:
+    description: Internal server error
+    schema:
+      type: string
+      default: "Internal server error"
                 
 definitions:
+  Error:
+    type: object
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+      errors: 
+        type: array
+        items:
+          $ref: '#/definitions/FieldError'
+        
+  FieldError:
+    type: object
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+      field:
+        type: string
+                
   NewCard:
     type: object
     properties:
@@ -221,7 +299,7 @@ definitions:
       views:
         type: array
         items: 
-          $ref: '#/definitions/LocationAggregate'          
+          $ref: '#/definitions/LocationAggregate'    
 
   LocationAggregate:
     type: object
@@ -236,6 +314,9 @@ definitions:
   CardTemplate:
     type: object
     properties:
+      id: 
+        description: The unique identifier for this card template
+        type: string
       message:
         description: The message that is going to be put on the card
         type: string
@@ -252,14 +333,16 @@ definitions:
       location:
         description: Description of the location where the card was located
         type: string
+      name:
+        description: Name of the person that got the card
+        type: string        
       when:
         description: When the card was found (the gotcha moment)
         type: string
         format: date-time
-      selfie:
-        description: The base64 encoded image of someone with the card
+      selfieUri:
+        description: The link to the uploaded image (usually a CDN like S3)
         type: string
-        format: byte
       comment:
         description: The comment given by the user about finding the gotcha
         type: string
