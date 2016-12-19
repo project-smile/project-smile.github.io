@@ -31,8 +31,18 @@
 
     <script type="text/javascript" src="/assets/js/general.js"></script>
     <script type="text/javascript">
-        function continueToApp() {
+        function iHaveIt() {
+            document.body.classList.add('exiting');
+            window.setTimeout(function() {
+                window.location.href = 'register.html';
+            }, 1500);
             return false; // do not follow the link
+        }
+
+        function moreInfo() {
+            document.body.classList.add('exiting');
+            window.location.href = 'moreinfo.html';
+            return false;
         }
     </script>
 </head>
@@ -43,8 +53,8 @@
 <div class="card-welcome">
     <p>"Ik wens jou alvast hele fijne feestdagen en een geweldig nieuwjaar!"</p>
     <div class="container">
-        <a class="button ihaveit continue" track-event="card-welcome-ihaveit" onclick="continueToApp()" href="app.html">Ik heb het kaartje!</a>
-        <a class="button iwantit continue" track-event="card-welcome-iwantit" onclick="continueToApp()" href="app.html">Meer informatie</a>
+        <a class="button ihaveit continue" track-event="card-welcome-ihaveit" onclick="return iHaveIt()" href="register.html">Ik heb het kaartje!</a>
+        <a class="button moreinfo continue" track-event="card-welcome-moreinfo" onclick="return moreInfo()" href="moreinfo.html">Meer informatie</a>
     </div>
 </div>
 

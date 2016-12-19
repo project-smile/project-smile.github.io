@@ -16,6 +16,17 @@ body {
     height: 100vh;
     overflow: hidden;
     background-color: black; /* note this needs to change if the view changes */
+    opacity: 0;
+}
+
+body.fade-in {
+    opacity: 1;
+    transition: 1.5s opacity ease-in-out;
+}
+
+body.exiting {
+    opacity: 0;
+    transition: 1.5s opacity ease-in-out;
 }
 
 body > div.card-welcome {
