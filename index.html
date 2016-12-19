@@ -55,6 +55,15 @@
             });
         });
 
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('div.overlay').forEach(function(overlay) {
+                overlay.addEventListener('click', function(ev) {
+                    if (ev.target === overlay) {
+                        overlay.classList.remove('visible');
+                    }
+                });
+            });
+        });
         // setup event tracking
         document.addEventListener('DOMContentLoaded', function() {
             ga('set', 'dimension1', 'unknown'); // dimension1 = card
