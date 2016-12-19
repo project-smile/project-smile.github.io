@@ -22,7 +22,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
 }
 
@@ -30,11 +30,9 @@ h1 {
     font-size: 2em;
 }
 
-
 p.copyright {
     margin: 15px 0 0;
 }
-
 
 body.full {
     width: 100%;
@@ -54,8 +52,7 @@ body.full #map {
 
 }
 
-
-body.full img.logo {
+body.full > img.logo {
     position: absolute;
     left: 5px;
     top: 5px;
@@ -97,13 +94,21 @@ body.full footer > {
 }
 
 @keyframes slideIn {
-    from { top: 100%; }
-    to   { top: 0; }
+    from {
+        top: 100%;
+    }
+    to {
+        top: 0;
+    }
 }
 
 @keyframes fade {
-    0%,100% { opacity: 0.6 }
-    50% { opacity: 1 }
+    0%, 100% {
+        opacity: 0.6
+    }
+    50% {
+        opacity: 1
+    }
 }
 
 body.full div.overlay {
@@ -139,7 +144,7 @@ body.full div.overlay > div.content .closeMe {
     right: 5px;
 }
 
-body.full  div.overlay.visible {
+body.full div.overlay.visible {
     -webkit-animation-name: slideIn;
     -webkit-animation-duration: 1.5s;
     top: 0;
@@ -181,8 +186,14 @@ body.full #cardOverlay div.card p.message {
 }
 
 @keyframes slideInTopRight {
-    from { top: -100%; left: 100%; }
-    to   { top: 0; left: 0; }
+    from {
+        top: -100%;
+        left: 100%;
+    }
+    to {
+        top: 0;
+        left: 0;
+    }
 }
 
 div.overlay.fade.out {
