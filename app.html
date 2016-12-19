@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="description" content="Een glimlach is het mooiste dat je kunt dragen. Wat heeft jou vandaag doen glimlachen?">
+    <meta name="author" content="Sander de Groot">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <meta property="og:title" content="Project Smile - Brengt de glimlach weer terug op je gezicht"/>
+    <meta property="og:image" content="http://projectsmile.nl/assets/img/logo.png"/>
+    <meta property="og:site_name" content="Project Smile"/>
+    <meta property="og:description" content="Ik wens jou alvast hele fijne feestdagen en een geweldig nieuwjaar!"/>
+
+    <title>Project Smile - Wat heeft jou vandaag doen glimlachen?</title>
+
+    <!-- Custom CSS -->
+    <link href="assets/css/card-welcome.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="/assets/js/general.js"></script>
+    <script type="text/javascript">
+        function continueToApp() {
+            return false; // do not follow the link
+        }
+    </script>
+</head>
+
+<body>
+
+
+<div class="card-welcome">
+    <p>"Ik wens jou alvast hele fijne feestdagen en een geweldig nieuwjaar!"</p>
+    <div class="container">
+        <a class="button continue" track-event="card-welcome-continue" onclick="continueToApp()" href="app.html">Continue</a>
+    </div>
+</div>
+
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    if (window.location.hostname.lastIndexOf('projectsmile.nl') > -1) {
+        // prd profile
+        ga('create', 'UA-85533742-1', 'auto');
+    } else {
+        //dev profile
+        ga('create', 'UA-85533742-2', 'auto');
+    }
+    ga('send', 'pageview');
+</script>
+</body>
+</html>
