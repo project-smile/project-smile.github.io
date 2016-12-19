@@ -111,7 +111,11 @@ body.full div.overlay {
     left: 0;
     top: 100%;
     width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    right: 0;
     height: 100%;
+    max-width: 500px;
     padding-top: 10px;
     padding-bottom: 50px;
     padding-right: 5px;
