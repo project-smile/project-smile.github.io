@@ -1,0 +1,158 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<script src="../projectsmile/static/js/qrcode.min.js"></script>
+
+<dom-module id="projectsmile-card">
+    <template>
+        <style>
+            /* local DOM styles go here */
+            :host {
+                display: inline-block;
+            }
+
+            :host([pressed]) iron-icon {
+                fill: currentcolor;
+            }
+
+            @font-face {
+                font-family: "Sofia";
+                src: url("assets/Sofia-Regular.otf") format("opentype");
+            }
+
+            .card {
+                position: relative;
+                background-color: white;
+                width: 425px;
+                height: 275px;
+            }
+
+            .card .inner-card {
+                width: 100%;
+                height: 100%;
+            }
+
+            .inner-card img {
+                max-height: 100%;
+                max-width: 100%;
+            }
+
+            .card {
+                text-align: center;
+                color: yellow;
+                font-family: "Sofia", sans-serif;
+            }
+
+            .card.front {
+                background-image: url(assets/front-background.png);
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            .card {
+                page-break-inside: avoid;
+            }
+
+            .card.front .inner-card .message {
+                position: absolute;
+                overflow: hidden;
+                width: 100%;
+                top: 19mm;
+                height: 16mm;
+                padding-right: 5mm;
+                padding-left: 5mm;
+                color: white;
+            }
+
+            .card.front .inner-card .message p {
+                display: table-cell;
+                width: 76mm;
+                height: 17mm;
+                vertical-align: middle;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+            }
+
+            .card.front .inner-card .footer {
+                position: absolute;
+                bottom: 4mm;
+                text-align: right;
+                padding-left: 5mm;
+                width: 100%;
+                line-height: 130%;
+                padding-right: 18mm;
+                font-size: 0.6em;
+                color: white;
+                font-family: "Helvetica", sans-serif;
+            }
+
+            .inner-card .QRCode,
+            .inner-card .QRCode img {
+                width: 80px;
+            }
+
+            .inner-card .QRCode {
+                position: absolute;
+                right: 10px;
+                bottom: 10px;
+            }
+
+            .card .blackline {
+                height: 100px;
+                top: 20mm;
+                width: 100%;
+                position: absolute;
+                background-color: #272522;
+            }
+        </style>
+        <!-- local DOM goes here -->
+        <div class="card front" id="card">
+            <div class="blackline"></div>
+            <div class="inner-card">
+                <div class="QRCode">http://projectsmile.nl/QOR</div>
+                <div class="message">
+                    <p>Ik wil je even zeggen dat je er goed uit ziet vandaag! </p>
+                </div>
+                <div class="footer">Wil je weten waar dit kaartje is geweest?<br/>Kijk op <i>projectsmile.nl/QOX</i></div>
+            </div>
+        </div>
+    </template>
+    <script>
+        var polymer = Polymer({
+            is: 'projectsmile-card',
+        });
+
+
+        var getQueryString = function (field, url) {
+            var href = url ? url : window.location.search;
+            var reg = new RegExp('[?&]' + field + '=([^&#]*)', 'i');
+            var string = reg.exec(href);
+            return string ? decodeURIComponent(string[1]) : null;
+        };
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            var message = getQueryString('message');
+            var code = getQueryString('code');
+
+            var container = document.body;
+            var card = document.getElementById('card');
+
+//                card.querySelector(".QRCode").innerHTML = 'http://projectsmile.nl/' + code + "?qr";
+//                card.querySelector(".footer i").innerHTML = 'projectsmile.nl/' + code;
+//                card.querySelector(".message p").innerHTML = message;
+
+            container.appendChild(card);
+
+            var qrCodeElems = document.getElementsByClassName('QRCode');
+            for (var i = 0; i < qrCodeElems.length; i++) {
+                var qrCodeElem = qrCodeElems[i];
+                var text = qrCodeElem.innerHTML;
+                qrCodeElem.innerHTML = '';
+                polymer.scopeSubtree(qrCodeElem, true);
+                        new QRCode(qrCodeElem, {text: text, colorLight: 'transparent'});
+            }
+        });
+
+    </script>
+</dom-module>

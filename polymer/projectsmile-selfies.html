@@ -1,0 +1,25 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<dom-module id="projectsmile-card">
+    <template>
+        <style>
+            /* local DOM styles go here */
+            :host {
+                display: inline-block;
+            }
+            iron-icon {
+                fill: rgba(0,0,0,0);
+                stroke: currentcolor;
+            }
+            :host([pressed]) iron-icon {
+                fill: currentcolor;
+            }
+        </style>
+        <!-- local DOM goes here -->
+        blabla
+    </template>
+    <script>
+        Polymer({
+            is: 'projectsmile-card',
+        });
+    </script>
+</dom-module>

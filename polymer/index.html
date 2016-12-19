@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+<!-- Polyfill Web Components support for older browsers -->
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+
+  <!-- Import element -->
+  <link rel="import" href="bower_components/google-map/google-map.html">
+  <link rel="import" href="projectsmile-card.html">
+
+
+    <style>
+    google-map {
+      height: 300px;
+      width: 200px;
+    }
+
+    html {
+      box-sizing: border-box;
+    }
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+
+    </style>
+
+
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NRRRQM8');</script>
+  <!-- End Google Tag Manager -->
+
+</head>
+<body>
+<projectsmile-card></projectsmile-card>
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v2.8&appId=923116497788604";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NRRRQM8"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<input type="file" accept="image/*;capture=camera">
+
+
+
+  <google-map latitude="51.9814708" longitude="5.1163364"
+              api-key="AIzaSyDjL6cvWIfMIFOkvpJtEKjsZFRe6oCXwN4"
+              zoom="6" map-type="roadmap" disable-map-type-control="true"
+              disable-street-view-control="true"></google-map>
+
+
+<div class="fb-comments" data-numposts="5" data-order-by="social"></div>
+
+<div
+        class="fb-like"
+        data-share="true"
+        data-width="450"
+        data-show-faces="true">
+</div>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="Ik kreeg dit kaartje vandaag!" data-hashtags="projectsmile" data-lang="nl" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</body>
+</html>
