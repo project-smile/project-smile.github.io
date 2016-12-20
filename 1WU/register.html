@@ -26,7 +26,7 @@
     <title>Project Smile - Wat heeft jou vandaag doen glimlachen?</title>
 
     <!-- Custom CSS -->
-    <link href="../../../project-smile.github.io/assets/css/register.css" rel="stylesheet">
+    <link href="/assets/css/register.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,27 +36,19 @@
     <![endif]-->
 
     <script type="text/javascript" src="/assets/js/general.js"></script>
+    <script type="text/javascript" src="/assets/js/register.js"></script>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.teal-orange.min.css">
     <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 
-
-    <script>
-
-        function initGoogleMaps() {
-            var input = document.getElementById('location');
-            var searchBox = new google.maps.places.SearchBox(input, {
-//                bounds: new google.maps.LatLngBounds(
-//                        new google.maps.LatLng(-33.8902, 151.1759),
-//                        new google.maps.LatLng(-33.8474, 151.2631))
-            });
-            window.setTimeout(function() {
-                input.removeAttribute('placeholder');
-                input.parentNode.classList.remove('has-placeholder');
-            }, 1000);
-
-        }
+    <script type="text/javascript">
+        window.card = {
+            cardId: '1WU',
+            templateId: 'MSG2',
+            message: 'Geniet elke dag alsof het je laatste is. Lach wanneer je kan!'
+        };
     </script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDjL6cvWIfMIFOkvpJtEKjsZFRe6oCXwN4&callback=initGoogleMaps"></script>
@@ -67,27 +59,105 @@
 
 <div class="register">
 
-    <form action="" enctype="multipart/form-data">
+    <form id="registrationForm" enctype="multipart/form-data">
 
         <header>
-            <img src="../../../project-smile.github.io/assets/img/logo-without-border.png" class="logo without border"/>
-
+            <img src="/assets/img/logo-without-border.png" class="logo without border"/>
         </header>
 
 
-        <section>
+        <section class="page first_page active">
             <p>Leuk! Je hebt een kaartje van iemand gekregen.</p>
-            <p>Laat zien dat jij hem hebt gehad, zet 'm op de kaart!</p>
+            <p>Laat ons weten even weten waar en wij zetten het op de kaart!</p>
 
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" id="location">
-                <label class="mdl-textfield__label" for="location">Waar kreeg je dit kaartje?</label>
+                <input class="mdl-textfield__input" type="text" id="name" name="name" required>
+                <label class="mdl-textfield__label" for="name">Wat is je voornaam?</label>
             </div>
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="location" name="location" required>
+                <label class="mdl-textfield__label" for="location" style="visibility: hidden;">Waar kreeg je dit kaartje?</label>
+            </div>
+
+            <footer>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button-accent"
+                        onclick="return registration.submit('first_page')">
+                    Ga verder
+                </button>
+            </footer>
         </section>
 
-        <footer>
-            <a class="button continue" track-event="card-register-next" onclick="return next()" href="moreinfo.html">Ga verder</a>
-        </footer>
+        <section class="page selfie">
+            <p>Maak een selfie met jouw kaartje!</p>
+
+            <div class="selfie" onclick="document.getElementById('selfieInput').click()">
+                <i class="material-icons camera">camera_enhance</i>
+                <img style="display:none;" id="selfiePicture" />
+            </div>
+
+            <input type="file" accept="image/*;capture=camera" style="display: none;" name="selfie" id="selfieInput" />
+
+            <a class="skip">Overslaan</a>
+
+            <footer>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button-accent"
+                        onclick="return registration.submit('selfie')">
+                    Ga verder
+                </button>
+            </footer>
+
+        </section>
+
+
+        <section class="page confirm">
+            <p>Zet mij op de kaart!</p>
+
+            <div class="map" id="map">
+            </div>
+
+            <footer>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button-accent"
+                        onclick="return registration.submit()">
+                    Opslaan!
+                </button>
+            </footer>
+
+        </section>
+
+        <section class="page finished">
+            <p>Bedankt!</p>
+            <p>Nu kunnen anderen zien waar jij het kaartje hebt gehad! Tof</p>
+            <p>Wil je zien hoe de andere kaartjes werken? Klik dan op de knop hieronder.</p>
+
+            <div class="social">
+                <!-- Load Facebook SDK for JavaScript -->
+                <div id="fb-root"></div>
+                <script>(function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = "//connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v2.8&appId=145696559204696";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));</script>
+
+                <div class="fb-like" data-href="https:&#x2F;&#x2F;projectsmile.nl&#x2F;1WU" data-layout="button" data-action="like" data-size="small"
+                     data-show-faces="true" data-share="true"></div>
+
+                <a href="https://twitter.com/share" class="twitter-share-button" data-text="message " data-url="https:&#x2F;&#x2F;projectsmile.nl&#x2F;1WU"
+                   data-hashtags="projectsmile" data-lang="nl" data-show-count="false">Tweet</a>
+                <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+
+            <footer>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button-accent"
+                        onclick="window.location.href='https://projectsmile.nl'; return false;">
+                    Bekijk alle kaartjes
+                </button>
+            </footer>
+
+        </section>
+
 
     </form>
 
