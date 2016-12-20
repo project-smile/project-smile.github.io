@@ -17,6 +17,7 @@ body {
     overflow: hidden;
     background-color: black; /* note this needs to change if the view changes */
     opacity: 0;
+    margin: 0;
 }
 
 body.fade-in {
@@ -80,6 +81,17 @@ body > div.card-welcome .container {
     bottom: 1em;
     left: 0;
     right: 0;
+}
+
+body > div.card-welcome .share-card {
+    position: absolute;
+    top: 0.6em;
+    right: 0.6em;
+    width: 1em;
+    height: 1em;
+    background-image: url(/assets/img/share-icon.png);
+    background-size: cover;
+
 }
 
 .button {
