@@ -91,14 +91,17 @@
         <section class="page selfie">
             <p>Maak een selfie met jouw kaartje!</p>
 
-            <div class="selfie" onclick="document.getElementById('selfieInput').click()">
+            <div class="selfiewrapper">
+            <div class="selfie" onclick="return registration.makeSelfie()">
                 <i class="material-icons camera">camera_enhance</i>
                 <img style="display:none;" id="selfiePicture" />
+                <div class="mdl-spinner mdl-js-spinner is-active"></div>
+            </div>
             </div>
 
-            <input type="file" accept="image/*;capture=camera" style="display: none;" name="selfie" id="selfieInput" />
+            <input type="file" accept="image/*;capture=camera" style="display: none;" id="selfieInput" />
 
-            <a class="skip">Overslaan</a>
+            <a class="skip" onclick="return registration.submit('selfie');">Overslaan</a>
 
             <footer>
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button-accent"

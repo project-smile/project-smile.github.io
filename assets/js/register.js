@@ -1,4 +1,33 @@
+switch (window.config.env) {
+    case 'dev':
+        window.config.registration = {
+            submitUrl: '/register',
+            imageUploadUrl: '/submit'
+        };
+        break;
+
+    case 'prd':
+        window.config.registration = {
+            submitUrl: 'https://f2dirw9cc0.execute-api.eu-west-1.amazonaws.com/dev/registration',
+            imageUploadUrl: 'https://f2dirw9cc0.execute-api.eu-west-1.amazonaws.com/dev/registration/photo'
+        };
+        break;
+}
+
 function Registration() {
+
+    var registration = this;
+
+    registration.form = document.getElementById('registrationForm');
+    registration.formData = {};
+
+    var selfieInput = document.getElementById('selfieInput');
+    selfieInput.addEventListener('change', function() {
+        // when we get back here, the user has selected. So let's start uploading.
+        // This is async
+        uploadSelfie();
+    });
+
 
     this.submit = function (state) {
         console.log('Submitting state: ' + state);
@@ -7,12 +36,16 @@ function Registration() {
 
             case 'first_page':
             {
+                registration.formData.firstname = 'Sample Name';
+                registration.formData.location = 'Sample Location';
                 gotoState('selfie');
             }
                 break;
 
             case 'selfie':
             {
+                // immediately go to the next state if there was no image uploaded
+                initMap();
                 gotoState('confirm');
             }
                 break;
@@ -22,7 +55,44 @@ function Registration() {
                 gotoState('finished');
         }
 
+        return false;
     };
+
+    this.makeSelfie = function () {
+        // simulate click on the file input (note that this is non-blocking)
+        selfieInput.click();
+        return false;
+    };
+
+
+    function uploadSelfie() {
+        registration.form.querySelector('div.selfie').classList.add('uploading');
+
+        var dataimg = new FormData();
+        dataimg.append('selfie', document.getElementById('selfieInput').files[0], 'selfie');
+
+        var oReq = new XMLHttpRequest();
+        oReq.open("POST", window.config.registration.imageUploadUrl, true);
+        oReq.onload = function () {
+            if (oReq.status == 200) {
+                var contentType = oReq.getResponseHeader('Content-Type');
+                var image = oReq.responseText;
+
+                var imageElem = document.getElementById('selfiePicture');
+                imageElem.src = 'data:' + contentType + ';base64,' + image;
+                imageElem.style.display = 'block';
+            } else {
+                // an error occurred
+                console.error('An error occurred while uploading the selfie');
+            }
+
+            registration.form.querySelector('div.selfie').classList.remove('uploading');
+        };
+
+        oReq.send(dataimg);
+        return false;
+
+    }
 
     function gotoState(state) {
         document.querySelectorAll('#registrationForm section').forEach(function (section) {
@@ -35,30 +105,9 @@ function Registration() {
     };
 }
 
-window.registration = new Registration();
-
-
-function uploadSelfie() {
-    var dataimg = new FormData();
-    dataimg.append('selfie', document.getElementById('selfieInput').files[0], 'selfie');
-
-    var oReq = new XMLHttpRequest();
-    oReq.open("POST", "/submit", true);
-    oReq.onload = function (oEvent) {
-        if (oReq.status == 200) {
-            var contentType = oReq.getResponseHeader('Content-Type');
-            var image = oReq.responseText;
-
-            var imageElem = document.getElementById('selfiePicture');
-            imageElem.src = 'data:' + contentType + ';base64,' + image;
-            imageElem.style.display = 'block';
-        } else {
-        }
-    };
-
-    oReq.send(dataimg);
-    return false;
-}
+document.addEventListener('DOMContentLoaded', function () {
+    window.registration = new Registration();
+});
 
 function initGoogleMaps() {
     var input = document.getElementById('location');
@@ -75,12 +124,12 @@ function initGoogleMaps() {
         input.parentNode.querySelector('label').style.visibility = 'visible';
     }, 1000);
 
-
-    initMap();
-
 }
 
+var mapInitialized = false;
 function initMap() {
+    if (mapInitialized) return true;
+    mapInitialized = true;
     var mapOptions = {
         zoom: 10,
         center: new google.maps.LatLng(51.9814708, 5.1163364),
@@ -405,7 +454,6 @@ function initMap() {
     });
 
     infowindow.open(map, marker);
-
 
 }
 
