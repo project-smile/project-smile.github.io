@@ -1,19 +1,3 @@
-switch (window.config.env) {
-    case 'dev':
-        window.config.registration = {
-            submitUrl: '/register',
-            imageUploadUrl: '/submit'
-        };
-        break;
-
-    case 'prd':
-        window.config.registration = {
-            submitUrl: 'https://f2dirw9cc0.execute-api.eu-west-1.amazonaws.com/dev/registration',
-            imageUploadUrl: 'https://f2dirw9cc0.execute-api.eu-west-1.amazonaws.com/dev/registration/photo'
-        };
-        break;
-}
-
 function Registration() {
 
     var registration = this;
@@ -22,7 +6,7 @@ function Registration() {
     registration.formData = {};
 
     var selfieInput = document.getElementById('selfieInput');
-    selfieInput.addEventListener('change', function() {
+    selfieInput.addEventListener('change', function () {
         // when we get back here, the user has selected. So let's start uploading.
         // This is async
         uploadSelfie();
@@ -72,18 +56,19 @@ function Registration() {
         dataimg.append('selfie', document.getElementById('selfieInput').files[0], 'selfie');
 
         var oReq = new XMLHttpRequest();
-        oReq.open("POST", window.config.registration.imageUploadUrl, true);
+        oReq.open("POST", window.config.apiBaseUrl + "/card/" + window.card.cardId + "/registration/selfie", true);
         oReq.onload = function () {
             if (oReq.status == 200) {
-                var contentType = oReq.getResponseHeader('Content-Type');
-                var image = oReq.responseText;
-
+                var selfieData = JSON.parse(oReq.responseText);
                 var imageElem = document.getElementById('selfiePicture');
-                imageElem.src = 'data:' + contentType + ';base64,' + image;
+                imageElem.src = selfieData.uri;
                 imageElem.style.display = 'block';
+                // enable the next button
+                registration.form.querySelector('section.selfie button').removeAttribute('disabled');
+
             } else {
                 // an error occurred
-                console.error('An error occurred while uploading the selfie');
+                snackbar('Je selfie kon niet geupload worden. Sorry');
             }
 
             registration.form.querySelector('div.selfie').classList.remove('uploading');
@@ -115,6 +100,13 @@ function initGoogleMaps() {
 //                bounds: new google.maps.LatLngBounds(
 //                        new google.maps.LatLng(-33.8902, 151.1759),
 //                        new google.maps.LatLng(-33.8474, 151.2631))
+    });
+
+    searchBox.setBounds({
+        east: 3.357962,
+        north: 53.556021,
+        south: 50.750384,
+        west: 7.227510
     });
 
     // fix the placeholder from the location label as this messes with material design

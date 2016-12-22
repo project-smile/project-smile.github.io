@@ -12,6 +12,27 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="mobile-web-app-capable" content="yes">
 
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="ProjectSmile"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
+
     <meta http-equiv="cache-control" content="max-age=0" />
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="expires" content="0" />
@@ -41,7 +62,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.teal-orange.min.css">
-    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 
     <script type="text/javascript">
         window.card = {
@@ -56,13 +76,16 @@
 
 <body>
 
+<div class="loading">
+    <div class="mdl-spinner mdl-js-spinner is-active"></div>
+</div>
 
 <div class="register">
 
     <form id="registrationForm" enctype="multipart/form-data">
 
         <header>
-            <img src="/assets/img/logo-without-border.png" class="logo without border"/>
+            <img track-event="register-logo" src="/assets/img/logo-without-border.png" class="logo without border"/>
         </header>
 
 
@@ -82,6 +105,7 @@
 
             <footer>
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button-accent"
+                        track-event="register-firstpage-continue"
                         onclick="return registration.submit('first_page')">
                     Ga verder
                 </button>
@@ -92,7 +116,7 @@
             <p>Maak een selfie met jouw kaartje!</p>
 
             <div class="selfiewrapper">
-            <div class="selfie" onclick="return registration.makeSelfie()">
+            <div class="selfie" onclick="return registration.makeSelfie()" track-event="register-selfie-placeholder">
                 <i class="material-icons camera">camera_enhance</i>
                 <img style="display:none;" id="selfiePicture" />
                 <div class="mdl-spinner mdl-js-spinner is-active"></div>
@@ -101,10 +125,11 @@
 
             <input type="file" accept="image/*;capture=camera" style="display: none;" id="selfieInput" />
 
-            <a class="skip" onclick="return registration.submit('selfie');">Overslaan</a>
+            <a class="skip" onclick="return registration.submit('selfie');" track-event="register-selfie-skip">Overslaan</a>
 
             <footer>
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button-accent"
+                        disabled track-event="register-selfie-continue"
                         onclick="return registration.submit('selfie')">
                     Ga verder
                 </button>
@@ -121,6 +146,7 @@
 
             <footer>
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button-accent"
+                        track-event="register-confirm-save"
                         onclick="return registration.submit()">
                     Opslaan!
                 </button>
@@ -154,6 +180,7 @@
 
             <footer>
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button-accent"
+                        track-event="register-finished-allcards"
                         onclick="window.location.href='https://projectsmile.nl'; return false;">
                     Bekijk alle kaartjes
                 </button>
@@ -166,5 +193,11 @@
 
 </div>
 
+<div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
+    <div class="mdl-snackbar__text"></div>
+    <button class="mdl-snackbar__action" type="button"></button>
+</div>
+
+<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 </body>
 </html>
