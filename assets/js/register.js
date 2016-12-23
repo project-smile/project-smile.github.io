@@ -13,15 +13,38 @@ function Registration() {
     });
 
 
-    this.submit = function (state) {
-        console.log('Submitting state: ' + state);
+    // try to get the geo location. Probably won't work anywhere. Well, we can try.
+    (function getGeolocation() {
+        if (navigator.geolocation) {
+            try {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    window.trackInfoEvent('geolocation-success');
+                    registration.formData.user_latitude = position.coords.latitude;
+                    registration.formData.user_longitude = position.coords.longitude;
+                }, function (error) {
+                    window.trackInfoEvent('geolocation-denied', JSON.stringify(error));
+                }, {
+                    enableHighAccuracy: false
+                });
+            } catch (e) {
+                trackError("Exception in getCurrentPosition", JSON.stringify(e));
+            }
+        } else {
+            window.trackInfoEvent('no-geolocation');
+        }
+    })();
 
+
+    this.submit = function (state) {
         switch (state) {
 
             case 'first_page':
             {
-                registration.formData.firstname = 'Sample Name';
-                registration.formData.location = 'Sample Location';
+                var location = document.getElementById('location');
+                registration.formData.firstname = document.getElementById('name').value;
+                registration.formData.location = document.getElementById('location').value;
+                registration.formData.location_latitude = location.dataset.latitude ? parseFloat(location.dataset.latitude) : null;
+                registration.formData.location_longitude = location.dataset.longitude ? parseFloat(location.dataset.longitude) : null;
                 gotoState('selfie');
             }
                 break;
@@ -29,14 +52,43 @@ function Registration() {
             case 'selfie':
             {
                 // immediately go to the next state if there was no image uploaded
-                initMap();
+                initMap(registration.formData);
                 gotoState('confirm');
+            }
+                break;
+
+            case 'finished':
+            {
+                window.loadingDialog.show();
+
+                // submit everything
+                var oReq = new XMLHttpRequest();
+                oReq.open("POST", window.config.apiBaseUrl + "/card/" + window.card.cardId + "/registration", true);
+                oReq.setRequestHeader("Content-Type", "application/json");
+                oReq.onload = function () {
+                    window.loadingDialog.hide();
+
+                    if (oReq.status == 200) {
+                        // var regId = oReq.responseText;
+                        // success, go to next page.
+                        gotoState('finished');
+                    } else {
+                        // an error occurred
+                        snackbar('Er is iets fout gegaan. Sorry');
+                        window.trackError('Error in submitRegistration. Response=' + oReq.status, oReq.status);
+                    }
+
+                    registration.form.querySelector('div.selfie').classList.remove('uploading');
+                };
+
+                oReq.send(JSON.stringify(registration.formData));
             }
                 break;
 
             default:
                 // try to submit everything...
-                gotoState('finished');
+                window.snackbar('Er is iets foutgegaan, sorry.');
+                window.trackError('Unknown state transition. Requested state=' + state, state);
         }
 
         return false;
@@ -62,6 +114,7 @@ function Registration() {
                 var selfieData = JSON.parse(oReq.responseText);
                 var imageElem = document.getElementById('selfiePicture');
                 imageElem.src = selfieData.uri;
+                registration.formData.selfieUploadId = selfieData.id;
                 imageElem.style.display = 'block';
                 // enable the next button
                 registration.form.querySelector('section.selfie button').removeAttribute('disabled');
@@ -69,6 +122,7 @@ function Registration() {
             } else {
                 // an error occurred
                 snackbar('Je selfie kon niet geupload worden. Sorry');
+                window.trackError('Error in submitRegistration. Response=' + oReq.status, oReq.status);
             }
 
             registration.form.querySelector('div.selfie').classList.remove('uploading');
@@ -109,6 +163,18 @@ function initGoogleMaps() {
         west: 7.227510
     });
 
+    google.maps.event.addListener(searchBox, 'places_changed', function () {
+        input.dataset.latitude = null;
+        input.dataset.longitude = null;
+        var places = searchBox.getPlaces();
+        if (places && places.length >= 1) {
+            var geometry = places[0].geometry.location;
+            input.dataset.latitude = geometry.lat();
+            input.dataset.longitude = geometry.lng();
+        }
+    });
+
+
     // fix the placeholder from the location label as this messes with material design
     window.setTimeout(function () {
         input.removeAttribute('placeholder');
@@ -119,12 +185,16 @@ function initGoogleMaps() {
 }
 
 var mapInitialized = false;
-function initMap() {
+function initMap(formData) {
+
+    var latitude = formData.location_latitude || formData.user_latitude || 51.9814708;
+    var longitude = formData.location_longitude || formData.user_longitude || 5.1163364;
+
     if (mapInitialized) return true;
     mapInitialized = true;
     var mapOptions = {
         zoom: 10,
-        center: new google.maps.LatLng(51.9814708, 5.1163364),
+        center: new google.maps.LatLng(latitude, longitude),
         scrollwheel: false,
         disableDefaultUI: true,
         styles: [
@@ -435,7 +505,8 @@ function initMap() {
     var map = new google.maps.Map(mapElement, mapOptions);
 
     var infowindow = new google.maps.InfoWindow();
-    infowindow.setContent('<div><b>Dit ben ik</b></div>');
+    var naam = formData.firstname || 'Anoniem';
+    infowindow.setContent('<div><b>'+naam+'</b></div>');
 
 
     var marker = new google.maps.Marker({
