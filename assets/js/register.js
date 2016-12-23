@@ -1,5 +1,5 @@
-if (location.protocol != 'https:')
-{
+// redirect to HTTPS.
+if (window.config.env === 'prd' && location.protocol !== 'https:') {
     location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
 }
 
@@ -74,9 +74,10 @@ function Registration() {
                     window.loadingDialog.hide();
 
                     if (oReq.status == 200) {
-                        // var regId = oReq.responseText;
+                        // var regId = req.responseText;
                         // success, go to next page.
                         gotoState('finished');
+                        window.trackInfoEvent('card-registered', window.card.cardId);
                     } else {
                         // an error occurred
                         snackbar('Er is iets fout gegaan. Sorry');
