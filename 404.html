@@ -28,9 +28,9 @@
     <script type="text/javascript">
         // redirect user to uppercase cardID if lowercase was given
         var matchLowercaseCardUrl = window.location.pathname.match(/([a-z0-9]{3})\/(.*)/);
-        if (matchLowercaseCardUrl && matchLowercaseCardUrl.length === 3) {
+        if (matchLowercaseCardUrl && matchLowercaseCardUrl.length >= 2) {
             var cardId = matchLowercaseCardUrl[1].toUpperCase();
-            var urlSuffix = matchLowercaseCardUrl[2] ? matchLowercaseCardUrl[2] : '';
+            var urlSuffix = matchLowercaseCardUrl.length > 2 ? matchLowercaseCardUrl[2] : '';
             window.location.href = '/' + cardId + '/' + urlSuffix;
         }
     </script>
