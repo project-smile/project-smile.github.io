@@ -25,6 +25,16 @@
 
     <title>Project Smile - Kaartje niet gevonden</title>
 
+    <script type="text/javascript">
+        // redirect user to uppercase cardID if lowercase was given
+        var matchLowercaseCardUrl = window.location.pathname.match(/([a-z0-9]{3})\/(.*)/);
+        if (matchLowercaseCardUrl && matchLowercaseCardUrl.length === 3) {
+            var cardId = matchLowercaseCardUrl[1].toUpperCase();
+            var urlSuffix = matchLowercaseCardUrl[2] ? matchLowercaseCardUrl[2] : '';
+            window.location.href = '/' + cardId + '/' + urlSuffix;
+        }
+    </script>
+
     <!-- Bootstrap Core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
@@ -42,6 +52,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
 </head>
 
 <body>
@@ -55,7 +66,6 @@
                 <div class="intro-message">
                     <div class="card">
                         <h1>Sorry ik heb je kaartje niet gevonden</h1>
-                        <p>Hieronder zie je alle kaartjes terug</p>
                     </div>
                 </div>
             </div>
