@@ -2,7 +2,10 @@
 
 
     var map = null;
+    var oms = null; // overlapping map spider (multiple spots in one location)
     var registrations = null;
+    var markers = [];
+    var infoWindow = null;
 
     var req = new XMLHttpRequest();
     req.open("GET", window.config.apiBaseUrl + "/card/-/registration", true);
@@ -18,21 +21,24 @@
     req.send();
 
     function onRegistrationClick(reg, marker) {
-        var content = '<h3>'+(reg.firstName?reg.firstName:'Anoniem')+'</h3>';
+        var content = '<div class="registrationPopup"><h3>' + (reg.firstName ? reg.firstName : 'Anoniem') + '</h3>';
         if (reg.selfieUri) {
-            content += '<p><img src="' + reg.selfieUri + '" alt="Selfie" /></p>';
+            content += '<p><img class="selfie" src="' + reg.selfieUri + '" alt="Selfie" /></p>';
         }
+        content += '</div>';
 
-        var infowindow = new google.maps.InfoWindow({
+        if (infoWindow) {
+            infoWindow.close();
+        }
+        infoWindow = new google.maps.InfoWindow({
             content: content
         });
-        infowindow.open(map, marker);
+        infoWindow.open(map, marker);
     }
 
 
     function addRegistrations() {
-        if (map != null && registrations != null) {
-            var markers = [];
+        if (map != null && registrations != null && oms != null) {
             var bounds = new google.maps.LatLngBounds();
             registrations.forEach(function (reg) {
                 if (reg.location_latitude && reg.location_longitude) {
@@ -41,11 +47,11 @@
                         title: reg.firstName ? reg.firstName : 'Anoniem'
                     });
                     markers.push(marker);
-                    marker.addListener('click', function() {
+                    marker.addListener('click', function () {
                         onRegistrationClick(reg, marker);
                     });
                     bounds.extend(marker.position);
-
+                    oms.addMarker(marker);
                 }
             });
 
@@ -58,9 +64,9 @@
                     imagePath: 'https://raw.githubusercontent.com/googlemaps/js-marker-clusterer/gh-pages/images/m'
                 });
 
-            google.maps.event.addListener(map, 'zoom_changed', function() {
+            google.maps.event.addListener(map, 'zoom_changed', function () {
                 var zoomChangeBoundsListener =
-                    google.maps.event.addListener(map, 'bounds_changed', function() {
+                    google.maps.event.addListener(map, 'bounds_changed', function () {
                         if (this.getZoom() > 13 && this.initialZoom == true) {
                             // Change max/min zoom here
                             this.setZoom(13);
@@ -74,7 +80,7 @@
         }
     }
 
-    this.initMap = function() {
+    this.initMap = function () {
         var mapOptions = {
             zoom: 8,
             center: new google.maps.LatLng(51.9814708, 5.1163364),
@@ -392,6 +398,15 @@
 
         var mapElement = document.getElementById('map');
         map = new google.maps.Map(mapElement, mapOptions);
+
+
+        var script = document.createElement("script");
+        script.src = '/assets/js/oms.min.js';
+        script.onload = function() {
+            oms = new OverlappingMarkerSpiderfier(map);
+            addRegistrations();
+        };
+        document.body.appendChild(script);
     };
 
     return this;
@@ -401,3 +416,24 @@
 function initMap() {
     map.initMap();
 }
+
+
+window.setTimeout(function () {
+// TODO: only start the tour as soon as the drawer button is known
+    var tour = {
+        id: "hello-hopscotch",
+        steps: [
+            {
+                title: "Welkom!",
+                content: "<p>Op deze pagina kun je zien waar kaartjes zijn gesignaleerd. " +
+                "Klik op een icoon op de kaart om de bijbehorende selfie te zien!</p><p>Voor meer informatie, klik linksboven in het menu.</p>",
+                target: document.querySelector('.mdl-layout__drawer-button'),
+                placement: "bottom"
+            }
+        ]
+    };
+
+// Start the tour!
+    hopscotch.startTour(tour);
+
+}, 3000);
